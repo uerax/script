@@ -10,11 +10,11 @@ TLS="true"
 
 is_root() {
     if [ $(id -u) == 0 ]; then
-        ok "进入安装流程"
+        echo -e "进入安装流程"
         sleep 3
     else
-        error "请切使用root用户执行脚本"
-        info "切换root用户命令: sudo su"
+        echo -e  "请切使用root用户执行脚本"
+        echo -e  "切换root用户命令: sudo su"
         exit 1
     fi
 }
@@ -22,16 +22,16 @@ is_root() {
 get_system() {
     source '/etc/os-release'
     if [[ "${ID}" == "debian" && ${VERSION_ID} -ge 9 ]]; then
-        info "检测系统为 debian"
+        echo -e  "检测系统为 debian"
         apt update
     elif [[ "${ID}"=="ubuntu" && $(echo "${VERSION_ID}" | cut -d '.' -f1) -ge 18 ]]; then
-        info "检测系统为 ubuntu"
+        echo -e  "检测系统为 ubuntu"
         apt update
     elif [[ "${ID}"=="centos" ]]; then
-        error "centos fuck out!"
+        echo -e  "centos fuck out!"
         exit 1
     else
-        error "当前系统为 ${ID} ${VERSION_ID} 不在支持的系统列表内"
+        echo -e  "当前系统为 ${ID} ${VERSION_ID} 不在支持的系统列表内"
         exit 1
     fi
 }
