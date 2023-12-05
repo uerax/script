@@ -83,12 +83,21 @@ filling_param() {
 }
 
 systemd_file() {
+    core=$(nproc)
+    CPUQuota="CPUQuota=${core}00%"
+    echo -e "========================================"
+    echo -e "输入CPUQuota限制(例:80)"
+    read -rp "请输入(直接回车则不设置): " quota
+    if [[ $quota =~ ^[0-9]+$ ]]; then
+    CPUQuota="CPUQuota=${quota}00%"
+    fi
     cat > /etc/systemd/system/xmrig.service << EOF
 [Unit]
 Description=miner service
 [Service]
 ExecStart=/root/xmrig --config=/root/config.json
 Restart=always
+${CPUQuota}
 Nice=10
 CPUWeight=1
 [Install]
