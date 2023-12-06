@@ -21,3 +21,7 @@ alias cd..='cd ..'
 alias gitignore='git update-index --assume-unchanged'
 alias noignore='git update-index --no-assume-unchanged'
 EOF
+
+source ~/.bashrc
+
+echo -e "添加完成"

@@ -38,3 +38,5 @@ Port ${port}
 EOF
 
 service sshd restart
+
+echo -e "修改完成"
