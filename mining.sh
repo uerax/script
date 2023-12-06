@@ -86,6 +86,7 @@ filling_param() {
     sed -i "s~\"tls\": false~\"tls\": ${TLS}~" /root/config.json
     sed -i "s~donate.v2.xmrig.com:3333~${POOL}~" /root/config.json
     sed -i "s~YOUR_WALLET_ADDRESS~${WALLET}~" /root/config.json
+    sed -i "s~\"x\"~\"${NAME}\"~" /root/config.json
 }
 
 systemd_file() {
