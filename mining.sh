@@ -7,6 +7,7 @@ ALGO="RandomX"
 POOL=""
 WALLET=""
 TLS="true"
+NAME=$(hostname)
 
 is_root() {
     if [ $(id -u) == 0 ]; then
@@ -43,6 +44,11 @@ input_param() {
     echo -e "========================================"
     read -rp "输入你的钱包地址: " wallet_tmp
     WALLET=${wallet_tmp}
+    echo -e "========================================"
+    read -rp "输入标识名称(默认hostname): " name_tmp
+    if [ -n "$name_tmp" ]; then
+    NAME=${name_tmp}
+    fi
     echo -e "========================================"
     read -rp "输入算法 (默认RandomX): " algo_tmp
     if [ -n "$algo_tmp" ]; then
