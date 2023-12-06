@@ -9,7 +9,14 @@ else
     exit 1
 fi
 
+iptables -P INPUT ACCEPT
+iptables -P FORWARD ACCEPT
+iptables -P OUTPUT ACCEPT
+iptables -F
+
 apt autoremove -y --purge needrestart
+apt purge -y netfilter-persistent
+rm -rf /etc/iptables
 apt update
 
 echo -e "========================================"
