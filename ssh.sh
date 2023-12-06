@@ -10,7 +10,7 @@ else
 fi
 
 apt autoremove -y --purge needrestart
-apt update && apt install -y vim
+apt update
 
 echo -e "========================================"
 echo -e "输入你的密码: "
