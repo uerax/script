@@ -159,9 +159,9 @@ server_opt() {
     read -rp "请输入 Y/N (默认Y): " start
     case $start in
     [nN])
-    systemctl start xmrig
     ;;
     *)
+    systemctl start xmrig
     ;;
     esac
 }
@@ -215,7 +215,7 @@ menu() {
     echo -e "\t\t${Yellow}版本号：${version}${Font}"
     echo -e "${Cyan}——————————————— 安装向导 ———————————————${Font}"
     echo -e "${Green}1)   编译安装${Font}"
-    echo -e "${Blue}2)   发布版本安装(fee 1%)${Font}"
+    echo -e "${Green}2)   发布版本安装(1%手续费)${Font}"
     echo -e "${Red}q)   退出${Font}"
     echo -e "${Cyan}————————————————————————————————————————${Font}\n"
 
