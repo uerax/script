@@ -3,11 +3,28 @@
 export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 stty erase ^?
 
+version="v0.1.0"
+
+#fonts color
+Green="\033[32m"
+Red="\033[31m"
+Yellow="\033[33m"
+Blue='\033[0;34m'         # Blue
+Purple='\033[0;35m'       # Purple
+Cyan='\033[0;36m'         # Cyan
+White='\033[0;37m'
+
+GreenBG="\033[42;37m"
+RedBG="\033[41;37m"
+Font="\033[0m"
+
 ALGO="RandomX"
 POOL=""
 WALLET=""
 TLS="true"
 NAME=$(hostname)
+
+XMRIG_RLS="https://api.github.com/repos/xmrig/xmrig/releases/latest"
 
 is_root() {
     if [ $(id -u) == 0 ]; then
@@ -81,6 +98,16 @@ xmrig_compile() {
     cp xmrig /root/ && cd .. && cp src/config.json /root/
 }
 
+xmrig_release() {
+    apt-get install tar curl
+    cd /root
+    download_url=$(curl -sL $XMRIG_RLS | grep "browser_download_url" | cut -d '"' -f 4 | grep "linux-static-x64")
+    curl -L "$download_url" -o xmrig.tar.gz
+    tar -vxf xmrig.tar.gz --strip-components=1
+    rm xmrig.tar.gz
+    rm SHA256SUMS
+}
+
 filling_param() {
     sed -i "s~\"algo\": null~\"algo\": \"${ALGO}\"~" /root/config.json
     sed -i "s~\"tls\": false~\"tls\": ${TLS}~" /root/config.json
@@ -93,7 +120,7 @@ systemd_file() {
     core=$(nproc)
     CPUQuota="CPUQuota=${core}00%"
     echo -e "========================================"
-    echo -e "输入CPUQuota限制(例:80)"
+    echo -e "输入CPUQuota限制(max:${core}00%)"
     read -rp "请输入(直接回车则不设置): " quota
     if [[ $quota =~ ^[0-9]+$ ]]; then
     CPUQuota="CPUQuota=${quota}00%"
@@ -154,7 +181,7 @@ show_info() {
     echo -e "================================"
 }
 
-go() {
+go_compile() {
     is_root
     get_system
     input_param
@@ -164,6 +191,49 @@ go() {
     optimize_sys
     server_opt
     show_info
+}
+
+go_release() {
+    is_root
+    get_system
+    input_param
+    xmrig_release
+    filling_param
+    systemd_file
+    optimize_sys
+    server_opt
+    show_info
+}
+
+
+
+menu() {
+    echo -e "${Cyan}——————————————— 脚本信息 ———————————————${Font}"
+    echo -e "\t\t${Yellow}一键挖矿脚本${Font}"
+    echo -e "\t${Yellow}---authored by uerax---${Font}"
+    echo -e "\t${Yellow}https://github.com/uerax${Font}"
+    echo -e "\t\t${Yellow}版本号：${version}${Font}"
+    echo -e "${Cyan}——————————————— 安装向导 ———————————————${Font}"
+    echo -e "${Green}1)   编译安装${Font}"
+    echo -e "${Blue}2)   发布版本安装(fee 1%)${Font}"
+    echo -e "${Red}q)   退出${Font}"
+    echo -e "${Cyan}————————————————————————————————————————${Font}\n"
+
+    read -rp "输入数字(回车确认)：" menu_num
+    echo -e ""
+    case $menu_num in
+    1)
+    go_compile
+    ;;
+    2)
+    go_release
+    ;;
+    q)
+    ;;
+    *)
+    error "请输入正确的数字"
+    ;;
+    esac
 }
 
 go
