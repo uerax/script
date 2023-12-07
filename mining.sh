@@ -236,4 +236,4 @@ menu() {
     esac
 }
 
-go
+menu
