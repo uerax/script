@@ -3,7 +3,7 @@
 export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 stty erase ^?
 
-version="v0.1.0"
+version="v0.1.1"
 
 #fonts color
 Green="\033[32m"
@@ -181,6 +181,69 @@ show_info() {
     echo -e "================================"
 }
 
+change_param() {
+    cp /root/config.json /root/config.json.bak
+    echo -e "========================================"
+    read -rp "是否修改矿池链接(Y/N): " pool_cg
+    case $pool_cg in
+    [nN])
+    ;;
+    *)
+    read -rp "输入矿池链接和端口: " pool_tmp
+    sed -i "s~^\(\s*\)\"url\":.*\1\"url\": \"${pool_tmp}\",~" /root/config.json
+    ;;
+    esac
+    
+    echo -e "========================================"
+    read -rp "是否修改钱包地址(Y/N): " wallet_cg
+    case $wallet_cg in
+    [nN])
+    ;;
+    *)
+    read -rp "输入你的钱包地址: " wallet_tmp
+    sed -i "s~^\(\s*\)\"user\":.*\1\"user\": \"${wallet_tmp}\",~" /root/config.json
+    ;;
+    esac
+
+    echo -e "========================================"
+    read -rp "是否修改标识名称(Y/N): " name_cg
+    case $name_cg in
+    [nN])
+    ;;
+    *)
+    read -rp "输入你的标识名称: " name_tmp
+    sed -i "s~^\(\s*\)\"pass\":.*\1\"pass\": \"${name_tmp}\",~" /root/config.json
+    ;;
+    esac
+
+    echo -e "========================================"
+    read -rp "是否修改算法(Y/N): " algo_cg
+    case $algo_cg in
+    [nN])
+    ;;
+    *)
+    read -rp "输入你的算法: " algo_tmp
+    sed -i "s~^\(\s*\)\"algo\":.*\1\"algo\": \"${algo_tmp}\",~" /root/config.json
+    ;;
+    esac
+
+    echo -e "========================================"
+    read -rp "是否修改TLS状态(Y/N): " tls_cg
+    case $tls_cg in
+    [nN])
+    ;;
+    *)
+    read -rp "输入你的TLS状态: " tls_tmp
+    if [[ "$tls_tmp" == "true" || "$tls_tmp" == "false" ]]; then
+        sed -i "s~\"tls\": false~\"tls\": ${tls_tmp}~" /root/config.json
+        sed -i "s~\"tls\": true~\"tls\": ${tls_tmp}~" /root/config.json
+    else
+        echo "输入值不是true或false,请手动修改"
+    fi
+    ;;
+    esac
+}
+
 go_compile() {
     is_root
     get_system
@@ -216,6 +279,7 @@ menu() {
     echo -e "${Cyan}——————————————— 安装向导 ———————————————${Font}"
     echo -e "${Green}1)   编译安装${Font}"
     echo -e "${Green}2)   发布版本安装(1%手续费)${Font}"
+    echo -e "${Yellow}3)   修改参数${Font}"
     echo -e "${Red}q)   退出${Font}"
     echo -e "${Cyan}————————————————————————————————————————${Font}\n"
 
@@ -227,6 +291,9 @@ menu() {
     ;;
     2)
     go_release
+    ;;
+    3)
+    change_param
     ;;
     q)
     ;;
