@@ -182,7 +182,7 @@ show_info() {
 }
 
 change_param() {
-    cp /root/config.json /root/config.json.bak
+    cp /root/config.json /root/config.json.old
     cp /root/config.json /root/config.json.tmp
     echo -e "========================================"
     read -rp "是否修改矿池链接(Y/N): " pool_cg
