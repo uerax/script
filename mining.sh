@@ -190,7 +190,7 @@ change_param() {
     ;;
     *)
     read -rp "输入矿池链接和端口: " pool_tmp
-    sed -i "s~^\(\s*\)\"url\":.*\1\"url\": \"${pool_tmp}\",~" /root/config.json
+    sed -i "s~^\(\s*\)\"url\":.*~\1\"url\": \"${pool_tmp}\",~" /root/config.json
     ;;
     esac
     
@@ -201,7 +201,7 @@ change_param() {
     ;;
     *)
     read -rp "输入你的钱包地址: " wallet_tmp
-    sed -i "s~^\(\s*\)\"user\":.*\1\"user\": \"${wallet_tmp}\",~" /root/config.json
+    sed -i "s~^\(\s*\)\"user\":.*~\1\"user\": \"${wallet_tmp}\",~" /root/config.json
     ;;
     esac
 
@@ -212,7 +212,7 @@ change_param() {
     ;;
     *)
     read -rp "输入你的标识名称: " name_tmp
-    sed -i "s~^\(\s*\)\"pass\":.*\1\"pass\": \"${name_tmp}\",~" /root/config.json
+    sed -i "s~^\(\s*\)\"pass\":.*~\1\"pass\": \"${name_tmp}\",~" /root/config.json
     ;;
     esac
 
@@ -223,7 +223,7 @@ change_param() {
     ;;
     *)
     read -rp "输入你的算法: " algo_tmp
-    sed -i "s~^\(\s*\)\"algo\":.*\1\"algo\": \"${algo_tmp}\",~" /root/config.json
+    sed -i "s~^\(\s*\)\"algo\":.*~\1\"algo\": \"${algo_tmp}\",~" /root/config.json
     ;;
     esac
 
