@@ -183,6 +183,7 @@ show_info() {
 
 change_param() {
     cp /root/config.json /root/config.json.bak
+    cp /root/config.json /root/config.json.tmp
     echo -e "========================================"
     read -rp "是否修改矿池链接(Y/N): " pool_cg
     case $pool_cg in
@@ -190,7 +191,7 @@ change_param() {
     ;;
     *)
     read -rp "输入矿池链接和端口: " pool_tmp
-    sed -i "s~^\(\s*\)\"url\":.*~\1\"url\": \"${pool_tmp}\",~" /root/config.json
+    sed -i "s~^\(\s*\)\"url\":.*~\1\"url\": \"${pool_tmp}\",~" /root/config.json.tmp
     ;;
     esac
     
@@ -201,7 +202,7 @@ change_param() {
     ;;
     *)
     read -rp "输入你的钱包地址: " wallet_tmp
-    sed -i "s~^\(\s*\)\"user\":.*~\1\"user\": \"${wallet_tmp}\",~" /root/config.json
+    sed -i "s~^\(\s*\)\"user\":.*~\1\"user\": \"${wallet_tmp}\",~" /root/config.json.tmp
     ;;
     esac
 
@@ -212,7 +213,7 @@ change_param() {
     ;;
     *)
     read -rp "输入你的标识名称: " name_tmp
-    sed -i "s~^\(\s*\)\"pass\":.*~\1\"pass\": \"${name_tmp}\",~" /root/config.json
+    sed -i "s~^\(\s*\)\"pass\":.*~\1\"pass\": \"${name_tmp}\",~" /root/config.json.tmp
     ;;
     esac
 
@@ -223,7 +224,7 @@ change_param() {
     ;;
     *)
     read -rp "输入你的算法: " algo_tmp
-    sed -i "s~^\(\s*\)\"algo\":.*~\1\"algo\": \"${algo_tmp}\",~" /root/config.json
+    sed -i "s~^\(\s*\)\"algo\":.*~\1\"algo\": \"${algo_tmp}\",~" /root/config.json.tmp
     ;;
     esac
 
@@ -235,13 +236,14 @@ change_param() {
     *)
     read -rp "输入你的TLS状态: " tls_tmp
     if [[ "$tls_tmp" == "true" || "$tls_tmp" == "false" ]]; then
-        sed -i "s~\"tls\": false~\"tls\": ${tls_tmp}~" /root/config.json
-        sed -i "s~\"tls\": true~\"tls\": ${tls_tmp}~" /root/config.json
+        sed -i "s~\"tls\": false~\"tls\": ${tls_tmp}~" /root/config.json.tmp
+        sed -i "s~\"tls\": true~\"tls\": ${tls_tmp}~" /root/config.json.tmp
     else
         echo "输入值不是true或false,请手动修改"
     fi
     ;;
     esac
+    mv /root/config.json.tmp /root/config.json
 }
 
 go_compile() {
