@@ -23,8 +23,21 @@ echo -e "========================================"
 echo -e "输入你的密码: "
 passwd root
 
-sudo sed -i 's/^#\?PermitRootLogin.*/PermitRootLogin yes/g' /etc/ssh/sshd_config;
-sudo sed -i 's/^#\?PasswordAuthentication.*/PasswordAuthentication yes/g' /etc/ssh/sshd_config;
+sed -i 's/^#\?PermitRootLogin.*/PermitRootLogin yes/g' /etc/ssh/sshd_config;
+sed -i 's/^#\?PasswordAuthentication.*/PasswordAuthentication yes/g' /etc/ssh/sshd_config;
+# 设置如果用户不能成功登录，在切断连接之前服务器需要等待的时间（以秒为单位）。
+sed -i 's/^#LoginGraceTime.*$/LoginGraceTime 30/' /etc/ssh/sshd_config
+# 最大尝试次数
+sed -i 's/^#MaxAuthTries.*$/MaxAuthTries 3/' /etc/ssh/sshd_config
+# 开启 RSA
+#sed -i 's/^#RSAAuthentication.*$/RSAAuthentication yes/' /etc/ssh/sshd_config
+# 是否使用公钥验证
+sed -i 's/^#PubkeyAuthentication/PubkeyAuthentication/' /etc/ssh/sshd_config
+sed -i 's/^#AuthorizedKeysFile/AuthorizedKeysFile/' /etc/ssh/sshd_config
+# 超时
+sed -i 's/^#TCPKeepAlive/TCPKeepAlive/' /etc/ssh/sshd_config
+sed -i 's/^#ClientAliveInterval.*$/ClientAliveInterval 600/' /etc/ssh/sshd_config
+sed -i 's/^#ClientAliveCountMax.*$/ClientAliveCountMax 3/' /etc/ssh/sshd_config
 
 port=2222
 echo -e "输入SSH要设置的端口(默认2222)"
@@ -33,9 +46,7 @@ if [[ $input =~ ^[0-9]+$ ]] && (($input >= 1 && $input <= 65535)); then
     port=${input}
 fi
 
-cat >> /etc/ssh/sshd_config <<EOF
-Port ${port}
-EOF
+sed -i "s/^Port.*$/Port ${port}/" /etc/ssh/sshd_config
 
 service sshd restart
 
