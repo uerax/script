@@ -46,7 +46,7 @@ if [[ $input =~ ^[0-9]+$ ]] && (($input >= 1 && $input <= 65535)); then
     port=${input}
 fi
 
-sed -i "s/^Port.*$/Port ${port}/" /etc/ssh/sshd_config
+sed -i "s/^#Port.*$/Port ${port}/" /etc/ssh/sshd_config
 
 service sshd restart
 
