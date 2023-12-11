@@ -121,10 +121,10 @@ systemd_file() {
     core=$(nproc)
     CPUQuota="CPUQuota=${core}00%"
     echo -e "========================================"
-    echo -e "输入CPUQuota限制(max:${core}00%)"
+    echo -e "输入CPUQuota限制(max:${core}00)"
     read -rp "请输入(直接回车则不设置): " quota
     if [[ $quota =~ ^[0-9]+$ ]]; then
-    CPUQuota="CPUQuota=${quota}00%"
+    CPUQuota="CPUQuota=${quota}%"
     fi
     cat > /etc/systemd/system/xmrig.service << EOF
 [Unit]
