@@ -6,6 +6,9 @@
 # 安装 Git
 brew install git
 
+# ClashX-Meta
+brew install zuisong/tap/clashx-meta
+
 # 安装 iterm2
 brew install --cask iterm2
 
@@ -25,4 +28,4 @@ brew install --cask scroll-reverser
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
 
-echo -e "ClashX.Meta: https://github.com/MetaCubeX/ClashX.Meta/releases"
+# echo -e "ClashX.Meta: https://github.com/MetaCubeX/ClashX.Meta/releases"
