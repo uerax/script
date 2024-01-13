@@ -56,27 +56,27 @@ get_system() {
 
 input_param() {
     echo -e "========================================"
-    echo -e "矿池链接和端口(url / -o): "
+    echo -e "${Green}=======矿池链接和端口(url / -o):${Font}"
     read -rp "请输入: " pool_tmp
     POOL=${pool_tmp}
     echo -e "========================================"
-    echo -e "钱包地址(user / -u): "
+    echo -e "${Green}=======钱包地址(user / -u):${Font}"
     read -rp "请输入: " wallet_tmp
     WALLET=${wallet_tmp}
     echo -e "========================================"
-    echo -e "标识名称(pass / -p): "
+    echo -e "${Green}=======标识名称(pass / -p):${Font}"
     read -rp "请输入: " name_tmp
     if [ -n "$name_tmp" ]; then
     NAME=${name_tmp}
     fi
     echo -e "========================================"
-    echo -e "算法(algo / -a): "
+    echo -e "${Green}=======算法(algo / -a):${Font}"
     read -rp "请输入: " algo_tmp
     if [ -n "$algo_tmp" ]; then
     ALGO=${algo_tmp}
     fi
     echo -e "========================================"
-    echo -e "是否开启TLS(tls / --tls)"
+    echo -e "${Green}=======是否开启TLS(tls / --tls)${Font}"
     read -rp "请输入(true/false): " tls_tmp
     case $tls_tmp in
     "false")
@@ -196,7 +196,7 @@ change_param() {
     [nN])
     ;;
     *)
-    echo -e "矿池链接(url / -o):"
+    echo -e "${Green}=======矿池链接(url / -o):${Font}"
     read -rp "请输入: " pool_tmp
     sed -i "s~^\(\s*\)\"url\":.*~\1\"url\": \"${pool_tmp}\",~" /root/config.json.tmp
     ;;
@@ -208,7 +208,7 @@ change_param() {
     [nN])
     ;;
     *)
-    echo -e "钱包地址(user / -u):"
+    echo -e "${Green}=======钱包地址(user / -u):${Font}"
     read -rp "请输入: " wallet_tmp
     sed -i "s~^\(\s*\)\"user\":.*~\1\"user\": \"${wallet_tmp}\",~" /root/config.json.tmp
     ;;
@@ -220,7 +220,7 @@ change_param() {
     [nN])
     ;;
     *)
-    echo -e "标识名称(pass / -p): "
+    echo -e "${Green}=======标识名称(pass / -p):${Font}"
     read -rp "请输入: " name_tmp
     sed -i "s~^\(\s*\)\"pass\":.*~\1\"pass\": \"${name_tmp}\",~" /root/config.json.tmp
     ;;
@@ -232,7 +232,7 @@ change_param() {
     [nN])
     ;;
     *)
-    echo -e "算法(algo / -a): "
+    echo -e "${Green}=======算法(algo / -a):${Font}"
     read -rp "请输入: " algo_tmp
     sed -i "s~^\(\s*\)\"algo\":.*~\1\"algo\": \"${algo_tmp}\",~" /root/config.json.tmp
     ;;
@@ -244,7 +244,7 @@ change_param() {
     [nN])
     ;;
     *)
-    echo -e "是否开启TLS(tls / --tls)"
+    echo -e "${Green}=======是否开启TLS(tls / --tls)${Font}"
     read -rp "请输入(true / false): " tls_tmp
     if [[ "$tls_tmp" == "true" || "$tls_tmp" == "false" ]]; then
         sed -i "s~\"tls\": false~\"tls\": ${tls_tmp}~" /root/config.json.tmp
