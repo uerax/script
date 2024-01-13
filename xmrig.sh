@@ -56,23 +56,28 @@ get_system() {
 
 input_param() {
     echo -e "========================================"
-    read -rp "输入矿池链接和端口: " pool_tmp
+    echo -e "矿池链接和端口(url / -o): "
+    read -rp "请输入: " pool_tmp
     POOL=${pool_tmp}
     echo -e "========================================"
-    read -rp "输入你的钱包地址: " wallet_tmp
+    echo -e "钱包地址(user / -u): "
+    read -rp "请输入: " wallet_tmp
     WALLET=${wallet_tmp}
     echo -e "========================================"
-    read -rp "输入标识名称(默认hostname): " name_tmp
+    echo -e "标识名称(pass / -p): "
+    read -rp "请输入: " name_tmp
     if [ -n "$name_tmp" ]; then
     NAME=${name_tmp}
     fi
     echo -e "========================================"
-    read -rp "输入算法 (默认RandomX): " algo_tmp
+    echo -e "算法(algo / -a): "
+    read -rp "请输入: " algo_tmp
     if [ -n "$algo_tmp" ]; then
     ALGO=${algo_tmp}
     fi
     echo -e "========================================"
-    read -rp "是否开启TLS(true/false): " tls_tmp
+    echo -e "是否开启TLS(tls / --tls)"
+    read -rp "请输入(true/false): " tls_tmp
     case $tls_tmp in
     "false")
     TLS="false"

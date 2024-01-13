@@ -1,6 +1,6 @@
 ## Usage
 
-__Xray 一键脚本__
+__Xray / Singbox 一键脚本__
 
 ```
 bash -c "$(curl -L https://raw.githubusercontent.com/uerax/taffy-onekey/master/taffy.sh)" @
