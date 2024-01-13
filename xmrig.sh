@@ -3,7 +3,7 @@
 export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 stty erase ^?
 
-version="v0.1.1"
+version="v0.1.2"
 
 #fonts color
 Green="\033[32m"
@@ -196,7 +196,8 @@ change_param() {
     [nN])
     ;;
     *)
-    read -rp "输入矿池链接和端口: " pool_tmp
+    echo -e "矿池链接(url / -o):"
+    read -rp "请输入: " pool_tmp
     sed -i "s~^\(\s*\)\"url\":.*~\1\"url\": \"${pool_tmp}\",~" /root/config.json.tmp
     ;;
     esac
@@ -207,7 +208,8 @@ change_param() {
     [nN])
     ;;
     *)
-    read -rp "输入你的钱包地址: " wallet_tmp
+    echo -e "钱包地址(user / -u):"
+    read -rp "请输入: " wallet_tmp
     sed -i "s~^\(\s*\)\"user\":.*~\1\"user\": \"${wallet_tmp}\",~" /root/config.json.tmp
     ;;
     esac
@@ -218,7 +220,8 @@ change_param() {
     [nN])
     ;;
     *)
-    read -rp "输入你的标识名称: " name_tmp
+    echo -e "标识名称(pass / -p): "
+    read -rp "请输入: " name_tmp
     sed -i "s~^\(\s*\)\"pass\":.*~\1\"pass\": \"${name_tmp}\",~" /root/config.json.tmp
     ;;
     esac
@@ -229,7 +232,8 @@ change_param() {
     [nN])
     ;;
     *)
-    read -rp "输入你的算法: " algo_tmp
+    echo -e "算法(algo / -a): "
+    read -rp "请输入: " algo_tmp
     sed -i "s~^\(\s*\)\"algo\":.*~\1\"algo\": \"${algo_tmp}\",~" /root/config.json.tmp
     ;;
     esac
@@ -240,7 +244,8 @@ change_param() {
     [nN])
     ;;
     *)
-    read -rp "输入你的TLS状态: " tls_tmp
+    echo -e "是否开启TLS(tls / --tls)"
+    read -rp "请输入(true / false): " tls_tmp
     if [[ "$tls_tmp" == "true" || "$tls_tmp" == "false" ]]; then
         sed -i "s~\"tls\": false~\"tls\": ${tls_tmp}~" /root/config.json.tmp
         sed -i "s~\"tls\": true~\"tls\": ${tls_tmp}~" /root/config.json.tmp
