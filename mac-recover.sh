@@ -24,6 +24,9 @@ brew install --cask maccy
 # 安装 scroll-reverser
 brew install --cask scroll-reverser
 
+# 安装 thor
+brew install --cask thor
+
 # 安装 oh-my-zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
