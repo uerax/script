@@ -1,6 +1,6 @@
 ## Usage
 
-__Xray / Singbox 一键脚本__
+__Xray / Sing-box 一键脚本__
 
 ```
 bash -c "$(curl -L https://raw.githubusercontent.com/uerax/taffy-onekey/master/taffy.sh)" @
@@ -12,7 +12,7 @@ __Linux 命令优化__
 bash -c "$(curl -L https://cdn.jsdelivr.net/gh/uerax/script@master/bashrc.sh)" @
 ```
 
-__一键安装 XMRIG 脚本__
+__一键安装 Xmrig 脚本__
 
 ```
 bash -c "$(curl -L https://raw.githubusercontent.com/uerax/script/master/xmrig.sh)" @
@@ -24,7 +24,7 @@ __一键安装 Qubic 脚本__
 bash -c "$(curl -L https://raw.githubusercontent.com/uerax/script/master/qubic.sh)" @
 ```
 
-__一键修改root密码和端口__
+__一键修改 Root 密码和端口__
 
 ```
 bash -c "$(curl -L https://cdn.jsdelivr.net/gh/uerax/script@master/ssh.sh)" @
