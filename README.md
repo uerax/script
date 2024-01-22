@@ -18,6 +18,12 @@ __一键安装 XMRIG 脚本__
 bash -c "$(curl -L https://raw.githubusercontent.com/uerax/script/master/xmrig.sh)" @
 ```
 
+__一键安装 Qubic 脚本__
+
+```
+bash -c "$(curl -L https://raw.githubusercontent.com/uerax/script/master/qubic.sh)" @
+```
+
 __一键修改root密码和端口__
 
 ```
