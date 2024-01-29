@@ -3,7 +3,7 @@
 export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 stty erase ^?
 
-version="v0.0.3"
+version="v0.0.4"
 
 #fonts color
 Green="\033[32m"
@@ -86,6 +86,7 @@ input_param() {
     read -rp "请输入: " algo_tmp
     ALGO=${algo_tmp}
 
+    filling_param
 }
 
 cpuminer_compile() {
@@ -235,7 +236,6 @@ go_compile() {
     get_system
     select_input_param
     cpuminer_compile
-    filling_param
     systemd_file
     optimize_sys
     server_opt
@@ -247,7 +247,6 @@ go_compile_arm() {
     get_system
     select_input_param
     cpuminer_compile_arm
-    filling_param
     systemd_file
     optimize_sys
     server_opt
@@ -259,7 +258,6 @@ go_release() {
     get_system
     select_input_param
     cpuminer_release
-    filling_param
     systemd_file
     optimize_sys
     server_opt
