@@ -257,7 +257,7 @@ menu() {
     2)
     go_release
     ;;
-    2)
+    3)
     go_compile_arm
     ;;
     9)
