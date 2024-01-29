@@ -1,4 +1,7 @@
-## Usage
+- [Normal]
+- [Mining]
+
+## Normal
 
 __Xray / Sing-box 一键脚本__
 
@@ -10,18 +13,6 @@ __Linux 命令优化__
 
 ```
 bash -c "$(curl -L https://cdn.jsdelivr.net/gh/uerax/script@master/bashrc.sh)" @
-```
-
-__一键安装 Xmrig 脚本__
-
-```
-bash -c "$(curl -L https://raw.githubusercontent.com/uerax/script/master/xmrig.sh)" @
-```
-
-__一键安装 Qubic 脚本__
-
-```
-bash -c "$(curl -L https://raw.githubusercontent.com/uerax/script/master/qubic.sh)" @
 ```
 
 __一键修改 Root 密码和端口__
@@ -53,3 +44,24 @@ bash <(wget --no-check-certificate -qO- 'https://raw.githubusercontent.com/MoeCl
 ```
 bash <(wget --no-check-certificate -qO- 'https://mirror.ghproxy.com/https://raw.githubusercontent.com/MoeClub/Note/master/InstallNET.sh') -d 11 -v 64 -port "2222" --mirror 'https://mirrors.cloud.tencent.com/debian/' -p "YOUR_PASSWORD" 
 ```
+
+## Mining
+
+__一键安装 Xmrig 脚本 (randomx, ghostrider, cryptonight...)__
+
+```
+bash -c "$(curl -L https://raw.githubusercontent.com/uerax/script/master/xmrig.sh)" @
+```
+
+__一键安装 Cpuminer 脚本 (yespower, yescrypt...)__
+
+```
+bash -c "$(curl -L https://raw.githubusercontent.com/uerax/script/master/cpuminer.sh)" @
+```
+
+__一键安装 Qubic 脚本__
+
+```
+bash -c "$(curl -L https://raw.githubusercontent.com/uerax/script/master/qubic.sh)" @
+```
+
