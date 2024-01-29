@@ -82,6 +82,14 @@ cpuminer_compile() {
     cp cpuminer /root/
 }
 
+cpuminer_compile_arm() {
+    apt-get install build-essential automake libssl-dev libcurl4-openssl-dev libjansson-dev libgmp-dev zlib1g-dev git -y
+    git clone https://github.com/JayDDee/cpuminer-opt.git cpuminer-opt
+    cd cpuminer-opt
+    ./arm-build.sh
+    cp cpuminer /root/
+}
+
 cpuminer_release() {
     apt-get install tar curl
     cd /root
@@ -200,6 +208,18 @@ go_compile() {
     show_info
 }
 
+go_compile_arm() {
+    is_root
+    get_system
+    input_param
+    cpuminer_compile_arm
+    filling_param
+    systemd_file
+    optimize_sys
+    server_opt
+    show_info
+}
+
 go_release() {
     is_root
     get_system
@@ -223,7 +243,8 @@ menu() {
     echo -e "${Cyan}——————————————— 安装向导 ———————————————${Font}"
     echo -e "${Green}1)   编译安装${Font}"
     echo -e "${Green}2)   发布版本安装${Font}"
-    echo -e "${Yellow}3)   修改参数${Font}"
+    echo -e "${Green}3)   ARM 编译安装${Font}"
+    echo -e "${Yellow}9)   修改参数${Font}"
     echo -e "${Red}q)   退出${Font}"
     echo -e "${Cyan}————————————————————————————————————————${Font}\n"
 
@@ -236,7 +257,10 @@ menu() {
     2)
     go_release
     ;;
-    3)
+    2)
+    go_compile_arm
+    ;;
+    9)
     change_param
     ;;
     q)
