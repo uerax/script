@@ -1,5 +1,5 @@
-- [Normal]
-- [Mining]
+- [Normal](#normal)
+- [Mining](#mining)
 
 ## Normal
 
