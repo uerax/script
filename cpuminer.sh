@@ -3,7 +3,7 @@
 export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 stty erase ^?
 
-version="v0.0.2"
+version="v0.0.3"
 
 #fonts color
 Green="\033[32m"
@@ -52,6 +52,20 @@ get_system() {
         echo -e  "当前系统为 ${ID} ${VERSION_ID} 不在支持的系统列表内"
         exit 1
     fi
+}
+
+select_input_param() {
+    echo -e "========================================"
+    echo -e "是否一次性自定义参数"
+    read -rp "请输入 Y/N (默认Y): " start
+    case $start in
+    [nN])
+    input_param
+    ;;
+    *)
+    all_param
+    ;;
+    esac
 }
 
 input_param() {
@@ -170,6 +184,27 @@ show_info() {
     echo -e "================================"
 }
 
+select_param() {
+    echo -e "========================================"
+    echo -e "是否一次性自定义参数"
+    read -rp "请输入 Y/N (默认Y): " start
+    case $start in
+    [nN])
+    change_param
+    ;;
+    *)
+    all_param
+    systemd_file
+    systemctl daemon-reload
+    ;;
+    esac
+}
+
+all_param() {
+    echo -e "${Green}=======输入全部参数:${Font}"
+    read -rp "请输入: " param
+}
+
 change_param() {
     echo -e "${Green}=======矿池链接(url / -o):${Font}"
     read -rp "请输入: " pool_tmp
@@ -193,13 +228,12 @@ change_param() {
     filling_param
     systemd_file
     systemctl daemon-reload
-
 }
 
 go_compile() {
     is_root
     get_system
-    input_param
+    select_input_param
     cpuminer_compile
     filling_param
     systemd_file
@@ -211,7 +245,7 @@ go_compile() {
 go_compile_arm() {
     is_root
     get_system
-    input_param
+    select_input_param
     cpuminer_compile_arm
     filling_param
     systemd_file
@@ -223,7 +257,7 @@ go_compile_arm() {
 go_release() {
     is_root
     get_system
-    input_param
+    select_input_param
     cpuminer_release
     filling_param
     systemd_file
@@ -231,8 +265,6 @@ go_release() {
     server_opt
     show_info
 }
-
-
 
 menu() {
     echo -e "${Cyan}——————————————— 脚本信息 ———————————————${Font}"
@@ -261,7 +293,7 @@ menu() {
     go_compile_arm
     ;;
     9)
-    change_param
+    select_param
     ;;
     q)
     ;;
