@@ -66,17 +66,11 @@ input_param() {
     echo -e "========================================"
     echo -e "${Green}=======标识名称(pass / -p):${Font}"
     read -rp "请输入: " name_tmp
-    if [ -n "$name_tmp" ]; then
     NAME=${name_tmp}
-    fi
     echo -e "========================================"
     echo -e "${Green}=======算法(algo / -a):${Font}"
     read -rp "请输入: " algo_tmp
-    if [ -n "$algo_tmp" ]; then
     ALGO=${algo_tmp}
-    fi
-    ;;
-    esac
 
 }
 
