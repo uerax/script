@@ -3,7 +3,7 @@
 export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 stty erase ^?
 
-version="v0.2.0"
+version="v0.2.1"
 
 #fonts color
 Green="\033[32m"
@@ -397,5 +397,3 @@ case $1 in
         menu
         ;;
 esac
-
-menu
