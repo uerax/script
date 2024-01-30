@@ -53,6 +53,12 @@ __一键安装 Xmrig 脚本 (randomx, ghostrider, cryptonight...)__
 bash -c "$(curl -L https://raw.githubusercontent.com/uerax/script/master/xmrig.sh)" @
 ```
 
+`一键修改参数`
+
+```
+bash -c "$(curl -L https://raw.githubusercontent.com/uerax/script/master/xmrig.sh)" @ change 矿池链接 钱包地址 标识名 算法 tls(true/false)
+```
+
 __一键安装 Cpuminer 脚本 (yespower, yescrypt...)__
 
 ```

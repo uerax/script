@@ -3,7 +3,7 @@
 export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 stty erase ^?
 
-version="v0.1.2"
+version="v0.2.0"
 
 #fonts color
 Green="\033[32m"
@@ -187,6 +187,75 @@ show_info() {
     echo -e "================================"
 }
 
+change_param_once_onekey() {
+    cp /root/config.json /root/config.json.old
+    cp /root/config.json /root/config.json.tmp
+    echo -e "========================================"
+    pool_tmp="$1"
+    wallet_tmp="$2"
+    name_tmp="$3"
+    algo_tmp="$4"
+    tls_tmp="$5"
+    if [ -n "${pool_tmp}" ]; then
+        sed -i "s~^\(\s*\)\"url\":.*~\1\"url\": \"${pool_tmp}\",~" /root/config.json.tmp
+    fi
+    if [ -n "${wallet_tmp}" ]; then
+        sed -i "s~^\(\s*\)\"user\":.*~\1\"user\": \"${wallet_tmp}\",~" /root/config.json.tmp
+    fi
+    if [ -n "${name_tmp}" ]; then
+        sed -i "s~^\(\s*\)\"pass\":.*~\1\"pass\": \"${name_tmp}\",~" /root/config.json.tmp
+    fi
+    if [ -n "${algo_tmp}" ]; then
+        sed -i "s~^\(\s*\)\"algo\":.*~\1\"algo\": \"${algo_tmp}\",~" /root/config.json.tmp
+    fi
+    if [ -n "${tls_tmp}" ]; then
+        if [[ "${tls_tmp}" == "true" || "${tls_tmp}" == "false" ]]; then
+            sed -i "s~\"tls\": false~\"tls\": ${tls_tmp}~" /root/config.json.tmp
+            sed -i "s~\"tls\": true~\"tls\": ${tls_tmp}~" /root/config.json.tmp
+        else
+            echo "输入值不是true或false,请手动修改"
+        fi
+    fi
+
+    mv /root/config.json.tmp /root/config.json
+}
+
+change_param_once() {
+    cp /root/config.json /root/config.json.old
+    cp /root/config.json /root/config.json.tmp
+    echo -e "========================================"
+    echo -e "例:矿池链接 钱包地址 标识名称 算法 是否tls(true/false)"
+    read -a params
+    pool_tmp=${params[0]:-''}
+    wallet_tmp=${params[1]:-''}
+    name_tmp=${params[2]:-''}
+    algo_tmp=${params[3]:-''}
+    tls_tmp=${params[4]:-''}
+    if [ -n "${pool_tmp}" ]; then
+        sed -i "s~^\(\s*\)\"url\":.*~\1\"url\": \"${pool_tmp}\",~" /root/config.json.tmp
+    fi
+    if [ -n "${wallet_tmp}" ]; then
+        sed -i "s~^\(\s*\)\"user\":.*~\1\"user\": \"${wallet_tmp}\",~" /root/config.json.tmp
+    fi
+    if [ -n "${name_tmp}" ]; then
+        sed -i "s~^\(\s*\)\"pass\":.*~\1\"pass\": \"${name_tmp}\",~" /root/config.json.tmp
+    fi
+    if [ -n "${algo_tmp}" ]; then
+        sed -i "s~^\(\s*\)\"algo\":.*~\1\"algo\": \"${algo_tmp}\",~" /root/config.json.tmp
+    fi
+    if [ -n "${tls_tmp}" ]; then
+        if [[ "${tls_tmp}" == "true" || "${tls_tmp}" == "false" ]]; then
+            sed -i "s~\"tls\": false~\"tls\": ${tls_tmp}~" /root/config.json.tmp
+            sed -i "s~\"tls\": true~\"tls\": ${tls_tmp}~" /root/config.json.tmp
+        else
+            echo "输入值不是true或false,请手动修改"
+        fi
+    fi
+
+    mv /root/config.json.tmp /root/config.json
+
+}
+
 change_param() {
     cp /root/config.json /root/config.json.old
     cp /root/config.json /root/config.json.tmp
@@ -246,7 +315,7 @@ change_param() {
     *)
     echo -e "${Green}=======是否开启TLS(tls / --tls)${Font}"
     read -rp "请输入(true / false): " tls_tmp
-    if [[ "$tls_tmp" == "true" || "$tls_tmp" == "false" ]]; then
+    if [[ "${tls_tmp}" == "true" || "${tls_tmp}" == "false" ]]; then
         sed -i "s~\"tls\": false~\"tls\": ${tls_tmp}~" /root/config.json.tmp
         sed -i "s~\"tls\": true~\"tls\": ${tls_tmp}~" /root/config.json.tmp
     else
@@ -293,6 +362,7 @@ menu() {
     echo -e "${Green}1)   编译安装${Font}"
     echo -e "${Green}2)   发布版本安装(1%手续费)${Font}"
     echo -e "${Yellow}3)   修改参数${Font}"
+    echo -e "${Yellow}4)   修改参数一次性${Font}"
     echo -e "${Red}q)   退出${Font}"
     echo -e "${Cyan}————————————————————————————————————————${Font}\n"
 
@@ -308,6 +378,9 @@ menu() {
     3)
     change_param
     ;;
+    4)
+    change_param_once
+    ;;
     q)
     ;;
     *)
@@ -315,5 +388,14 @@ menu() {
     ;;
     esac
 }
+
+case $1 in
+    change)
+        change_param_once_onekey $2 $3 $4 $5 $6
+        ;;
+    *)
+        menu
+        ;;
+esac
 
 menu
