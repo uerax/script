@@ -3,7 +3,7 @@
 export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 stty erase ^?
 
-version="v0.0.1"
+version="v0.0.4"
 
 #fonts color
 Green="\033[32m"
@@ -54,6 +54,20 @@ get_system() {
     fi
 }
 
+select_input_param() {
+    echo -e "========================================"
+    echo -e "是否一次性自定义参数"
+    read -rp "请输入 Y/N (默认Y): " start
+    case $start in
+    [nN])
+    input_param
+    ;;
+    *)
+    all_param
+    ;;
+    esac
+}
+
 input_param() {
     echo -e "========================================"
     echo -e "${Green}=======矿池链接和端口(url / -o):${Font}"
@@ -72,6 +86,7 @@ input_param() {
     read -rp "请输入: " algo_tmp
     ALGO=${algo_tmp}
 
+    filling_param
 }
 
 cpuminer_compile() {
@@ -79,6 +94,14 @@ cpuminer_compile() {
     git clone https://github.com/JayDDee/cpuminer-opt.git cpuminer-opt
     cd cpuminer-opt
     ./build.sh
+    cp cpuminer /root/
+}
+
+cpuminer_compile_arm() {
+    apt-get install build-essential automake libssl-dev libcurl4-openssl-dev libjansson-dev libgmp-dev zlib1g-dev git -y
+    git clone https://github.com/JayDDee/cpuminer-opt.git cpuminer-opt
+    cd cpuminer-opt
+    ./arm-build.sh
     cp cpuminer /root/
 }
 
@@ -162,6 +185,27 @@ show_info() {
     echo -e "================================"
 }
 
+select_param() {
+    echo -e "========================================"
+    echo -e "是否一次性自定义参数"
+    read -rp "请输入 Y/N (默认Y): " start
+    case $start in
+    [nN])
+    change_param
+    ;;
+    *)
+    all_param
+    systemd_file
+    systemctl daemon-reload
+    ;;
+    esac
+}
+
+all_param() {
+    echo -e "${Green}=======输入全部参数:${Font}"
+    read -rp "请输入: " param
+}
+
 change_param() {
     echo -e "${Green}=======矿池链接(url / -o):${Font}"
     read -rp "请输入: " pool_tmp
@@ -185,15 +229,24 @@ change_param() {
     filling_param
     systemd_file
     systemctl daemon-reload
-
 }
 
 go_compile() {
     is_root
     get_system
-    input_param
+    select_input_param
     cpuminer_compile
-    filling_param
+    systemd_file
+    optimize_sys
+    server_opt
+    show_info
+}
+
+go_compile_arm() {
+    is_root
+    get_system
+    select_input_param
+    cpuminer_compile_arm
     systemd_file
     optimize_sys
     server_opt
@@ -203,16 +256,13 @@ go_compile() {
 go_release() {
     is_root
     get_system
-    input_param
+    select_input_param
     cpuminer_release
-    filling_param
     systemd_file
     optimize_sys
     server_opt
     show_info
 }
-
-
 
 menu() {
     echo -e "${Cyan}——————————————— 脚本信息 ———————————————${Font}"
@@ -223,7 +273,8 @@ menu() {
     echo -e "${Cyan}——————————————— 安装向导 ———————————————${Font}"
     echo -e "${Green}1)   编译安装${Font}"
     echo -e "${Green}2)   发布版本安装${Font}"
-    echo -e "${Yellow}3)   修改参数${Font}"
+    echo -e "${Green}3)   ARM 编译安装${Font}"
+    echo -e "${Yellow}9)   修改参数${Font}"
     echo -e "${Red}q)   退出${Font}"
     echo -e "${Cyan}————————————————————————————————————————${Font}\n"
 
@@ -237,7 +288,10 @@ menu() {
     go_release
     ;;
     3)
-    change_param
+    go_compile_arm
+    ;;
+    9)
+    select_param
     ;;
     q)
     ;;
