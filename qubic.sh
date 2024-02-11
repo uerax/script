@@ -26,7 +26,7 @@ input_param() {
     echo -e "=======CPU核心数(max:${core})"
     read -rp "请输入: " core
     echo -e "========================================"
-    echo -e "=======钱包地址:"
+    echo -e "=======钱包地址: ZCTLTDWENTGPABZKMRLGXKKRXNXAONTLZGZCYDWEIBQMJUITAQBGRWSFWDHN"
     read -rp "请输入: " wallet
     echo -e "========================================"
     echo -e "=======标识名称:"
