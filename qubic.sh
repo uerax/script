@@ -26,6 +26,7 @@ input_param() {
     echo -e "=======CPU核心数(max:${core})"
     read -rp "请输入: " core
     echo -e "========================================"
+    echo -e "=======账号Token: eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJJZCI6ImM4NjVjNmU1LTBiOTQtNDdjNC04NzBkLThmNTRkOTQ5NzgzMiIsIk1pbmluZyI6IiIsIm5iZiI6MTcwNzczNjA5OSwiZXhwIjoxNzM5MjcyMDk5LCJpYXQiOjE3MDc3MzYwOTksImlzcyI6Imh0dHBzOi8vcXViaWMubGkvIiwiYXVkIjoiaHR0cHM6Ly9xdWJpYy5saS8ifQ.v_VgJJy6jXA-w4aJOo1wtgr7TPHP-2k9MY-8B63qBdv8EjzSWmlh0vx_r-DwF14hG8XrhpXtNv9TgaPyVTVc5Q"
     echo -e "=======钱包地址: ZCTLTDWENTGPABZKMRLGXKKRXNXAONTLZGZCYDWEIBQMJUITAQBGRWSFWDHN"
     read -rp "请输入: " wallet
     echo -e "========================================"
