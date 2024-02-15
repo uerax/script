@@ -90,7 +90,7 @@ bash -c "$(curl -L https://raw.githubusercontent.com/uerax/script/master/qubic.s
 `一键安装运行`
 
 ```
-bash -c "$(curl -L https://raw.githubusercontent.com/uerax/script/master/qubic.sh)" @ onekey 64 eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJJZCI6ImM4NjVjNmU1LTBiOTQtNDdjNC04NzBkLThmNTRkOTQ5NzgzMiIsIk1pbmluZyI6IiIsIm5iZiI6MTcwNzczNjA5OSwiZXhwIjoxNzM5MjcyMDk5LCJpYXQiOjE3MDc3MzYwOTksImlzcyI6Imh0dHBzOi8vcXViaWMubGkvIiwiYXVkIjoiaHR0cHM6Ly9xdWJpYy5saS8ifQ.v_VgJJy6jXA-w4aJOo1wtgr7TPHP-2k9MY-8B63qBdv8EjzSWmlh0vx_r-DwF14hG8XrhpXtNv9TgaPyVTVc5Q $(hostname)
+bash -c "$(curl -L https://raw.githubusercontent.com/uerax/script/master/qubic.sh)" @ onekey 64 $(hostname) eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJJZCI6ImM4NjVjNmU1LTBiOTQtNDdjNC04NzBkLThmNTRkOTQ5NzgzMiIsIk1pbmluZyI6IiIsIm5iZiI6MTcwNzczNjA5OSwiZXhwIjoxNzM5MjcyMDk5LCJpYXQiOjE3MDc3MzYwOTksImlzcyI6Imh0dHBzOi8vcXViaWMubGkvIiwiYXVkIjoiaHR0cHM6Ly9xdWJpYy5saS8ifQ.v_VgJJy6jXA-w4aJOo1wtgr7TPHP-2k9MY-8B63qBdv8EjzSWmlh0vx_r-DwF14hG8XrhpXtNv9TgaPyVTVc5Q
 ```
 
 ***

@@ -54,8 +54,8 @@ run() {
 onekey() {
     get_system
     core="$1"
-    wallet="$2"
-    name="$3"
+    name="$2"
+    wallet="$3"
     install
 }
 
