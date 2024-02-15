@@ -6,16 +6,16 @@ name=''
 get_system() {
     source '/etc/os-release'
     if [[ "${ID}" == "debian" && ${VERSION_ID} -ge 9 ]]; then
-        echo -e  "检测系统为 debian"
+        echo -e "检测系统为 debian"
         apt update
     elif [[ "${ID}"=="ubuntu" && $(echo "${VERSION_ID}" | cut -d '.' -f1) -ge 18 ]]; then
-        echo -e  "检测系统为 ubuntu"
+        echo -e "检测系统为 ubuntu"
         apt update
     elif [[ "${ID}"=="centos" ]]; then
         echo -e  "centos fuck out!"
         exit 1
     else
-        echo -e  "当前系统为 ${ID} ${VERSION_ID} 不在支持的系统列表内"
+        echo -e "当前系统为 ${ID} ${VERSION_ID} 不在支持的系统列表内"
         exit 1
     fi
 }
@@ -36,6 +36,7 @@ input_param() {
 
 install() {
     apt update
+    apt purge needrestart -y
     apt install libc6
     apt install -y g++-11
     wget -O qli-Service-install.sh https://dl.qubic.li/cloud-init/qli-Service-install.sh
@@ -50,4 +51,19 @@ run() {
     install
 }
 
-run
+onekey() {
+    get_system
+    core="$1"
+    wallet="$2"
+    name="$3"
+    install
+}
+
+case $1 in
+    onekey)
+        onekey $2 $3 $4
+        ;;
+    *)
+        run
+        ;;
+esac
