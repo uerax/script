@@ -3,7 +3,7 @@
 export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 stty erase ^?
 
-version="v0.1.4"
+version="v0.1.5"
 
 #fonts color
 Green="\033[32m"
@@ -303,9 +303,9 @@ cpuminer_aurum_release() {
     cd /root
     download_url=$(curl -sL $cpuminer_aurum_RLS | grep "browser_download_url" | grep CPU-AURUM-linux.tar.gz | cut -d '"' -f 4)
     curl -L "$download_url" -o cpuminer-aurum.tar.gz
-    mkdir -p cpuminer-aurum
-    tar -vxf cpuminer-aurum.tar.gz -C ./cpuminer-aurum/
-    cp cpuminer-aurum/cpuminer-linux/cpuminer /root/cpuminer-aurum
+    mkdir -p cpuminer-aurum-opt
+    tar -vxf cpuminer-aurum.tar.gz -C ./cpuminer-aurum-opt/
+    cp cpuminer-aurum-opt/cpuminer-linux/cpuminer /root/cpuminer-aurum
     rm cpuminer-aurum.tar.gz
 }
 
