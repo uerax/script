@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # 安装 Homebrew
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+/bin/bash -c "$(curl -fsSL https://cdn.jsdelivr.net/gh/Homebrew/install@HEAD/install.sh)"
 
 # 安装 Git
 brew install git
