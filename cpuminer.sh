@@ -3,7 +3,7 @@
 export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 stty erase ^?
 
-version="v0.1.1"
+version="v0.1.2"
 
 #fonts color
 Green="\033[32m"
@@ -204,6 +204,7 @@ select_param() {
 
 all_param() {
     echo -e "${Green}=======输入全部参数:${Font}"
+    echo -e "${Green}ag: -a aurum -o poolurl -u wallet -p name${Font}"
     read -rp "请输入: " param
 }
 
