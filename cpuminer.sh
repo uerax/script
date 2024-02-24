@@ -3,7 +3,7 @@
 export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 stty erase ^?
 
-version="v0.1.0"
+version="v0.1.1"
 
 #fonts color
 Green="\033[32m"
@@ -292,7 +292,7 @@ select_input_param_aurum() {
     input_param_aurum
     ;;
     *)
-    all_param_aurum
+    all_param
     ;;
     esac
 }
