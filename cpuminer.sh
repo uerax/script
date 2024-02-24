@@ -3,7 +3,7 @@
 export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 stty erase ^?
 
-version="v0.0.4"
+version="v0.1.0"
 
 #fonts color
 Green="\033[32m"
@@ -25,6 +25,7 @@ TLS="true"
 NAME=$(hostname)
 
 cpuminer_RLS="https://api.github.com/repos/rplant8/cpuminer-opt-rplant/releases/latest"
+cpuminer_aurum_RLS="https://api.github.com/repos/bitnet-io/cpuminer-opt-aurum/releases/latest"
 
 is_root() {
     if [ $(id -u) == 0 ]; then
@@ -264,6 +265,121 @@ go_release() {
     show_info
 }
 
+input_param_aurum() {
+    echo -e "========================================"
+    echo -e "${Green}=======矿池链接和端口(url / -o):${Font}"
+    read -rp "请输入: " pool_tmp
+    POOL=${pool_tmp}
+    echo -e "========================================"
+    echo -e "${Green}=======钱包地址(user / -u):${Font}"
+    read -rp "请输入: " wallet_tmp
+    WALLET=${wallet_tmp}
+    echo -e "========================================"
+    echo -e "${Green}=======标识名称(pass / -p):${Font}"
+    read -rp "请输入: " name_tmp
+    NAME=${name_tmp}
+    ALGO='aurum'
+
+    filling_param
+}
+
+select_input_param_aurum() {
+    echo -e "========================================"
+    echo -e "是否一次性自定义参数"
+    read -rp "请输入 Y/N (默认Y): " start
+    case $start in
+    [nN])
+    input_param_aurum
+    ;;
+    *)
+    all_param_aurum
+    ;;
+    esac
+}
+
+cpuminer_aurum_release() {
+    apt-get install tar curl
+    cd /root
+    download_url=$(curl -sL $cpuminer_aurum_RLS | grep "browser_download_url" | grep CPU-AURUM-linux.tar.gz | cut -d '"' -f 4)
+    curl -L "$download_url" -o cpuminer-aurum.tar.gz
+    mkdir -p cpuminer-aurum
+    tar -vxf cpuminer-aurum.tar.gz -C ./cpuminer-aurum/
+    cp cpuminer-aurum/cpuminer-linux /root/cpuminer-aurum
+    rm cpuminer-aurum.tar.gz
+}
+
+systemd_file_aurum() {
+    core=$(nproc)
+    CPUQuota="CPUQuota=${core}00%"
+    echo -e "========================================"
+    echo -e "输入CPUQuota限制(max:${core}00)"
+    read -rp "请输入(直接回车则不设置): " quota
+    if [[ $quota =~ ^[0-9]+$ ]]; then
+    CPUQuota="CPUQuota=${quota}%"
+    fi
+    cat > /etc/systemd/system/cpuminer-aurum.service << EOF
+[Unit]
+Description=miner service
+[Service]
+ExecStart=/root/cpuminer-aurum ${param}
+Restart=always
+${CPUQuota}
+Nice=10
+CPUWeight=1
+[Install]
+WantedBy=multi-user.target
+EOF
+}
+
+server_opt_aurum() {
+    echo -e "========================================"
+    echo -e "是否添加开机启动cpuminer-aurum"
+    read -rp "请输入 Y/N (默认N): " enable
+    case $enable in
+    [yY])
+    systemctl enable cpuminer-aurum
+    ;;
+    *)
+    ;;
+    esac
+    echo -e "========================================"
+    echo -e "是否立刻启动cpuminer-aurum"
+    read -rp "请输入 Y/N (默认Y): " start
+    case $start in
+    [nN])
+    ;;
+    *)
+    systemctl start cpuminer-aurum
+    ;;
+    esac
+}
+
+show_info_aurum() {
+    echo -e "================================"
+    echo -e "启动cpuminer:"
+    echo -e "systemctl start cpuminer-aurum"
+    echo -e "停止cpuminer:"
+    echo -e "systemctl stop cpuminer-aurum"
+    echo -e "查看cpuminer状态:"
+    echo -e "systemctl status cpuminer-aurum"
+    echo -e "开机自启:"
+    echo -e "systemctl enable cpuminer-aurum"
+    echo -e "关闭开机自启:"
+    echo -e "systemctl disable cpuminer-aurum"
+    echo -e "================================"
+}
+
+go_release_aurum() {
+    is_root
+    get_system
+    select_input_param_aurum
+    cpuminer_aurum_release
+    systemd_file_aurum
+    optimize_sys
+    server_opt_aurum
+    show_info_aurum
+}
+
 menu() {
     echo -e "${Cyan}——————————————— 脚本信息 ———————————————${Font}"
     echo -e "\t\t${Yellow}一键挖矿脚本${Font}"
@@ -275,6 +391,8 @@ menu() {
     echo -e "${Green}2)   发布版本安装${Font}"
     echo -e "${Green}3)   ARM 编译安装${Font}"
     echo -e "${Yellow}9)   修改参数${Font}"
+    echo -e "${Green}11)   发布版本安装 Aurum 算法版本${Font}"
+    #echo -e "${Yellow}19)   修改参数 Aurum 算法版本${Font}"
     echo -e "${Red}q)   退出${Font}"
     echo -e "${Cyan}————————————————————————————————————————${Font}\n"
 
@@ -292,6 +410,9 @@ menu() {
     ;;
     9)
     select_param
+    ;;
+    11)
+    go_release_aurum
     ;;
     q)
     ;;
