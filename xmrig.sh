@@ -100,7 +100,7 @@ xmrig_compile() {
     ./build_deps.sh && cd ../build
     cmake .. -DXMRIG_DEPS=scripts/deps
     make -j$(nproc)
-    cp xmrig /root/ && cd .. && cp src/config.json /root/
+    cp xmrig /root/ && cd .. && cp src/config.json /root/x
 }
 
 xmrig_release() {
@@ -109,6 +109,7 @@ xmrig_release() {
     download_url=$(curl -sL $XMRIG_RLS | grep "browser_download_url" | cut -d '"' -f 4 | grep "linux-static-x64")
     curl -L "$download_url" -o xmrig.tar.gz
     tar -vxf xmrig.tar.gz --strip-components=1
+    mv xmrig x
     rm xmrig.tar.gz
     rm SHA256SUMS
 }
@@ -131,11 +132,11 @@ systemd_file() {
     if [[ $quota =~ ^[0-9]+$ ]]; then
     CPUQuota="CPUQuota=${quota}%"
     fi
-    cat > /etc/systemd/system/xmrig.service << EOF
+    cat > /etc/systemd/system/x.service << EOF
 [Unit]
 Description=miner service
 [Service]
-ExecStart=/root/xmrig --config=/root/config.json
+ExecStart=/root/x --config=/root/config.json
 Restart=always
 ${CPUQuota}
 Nice=10
@@ -155,7 +156,7 @@ server_opt() {
     read -rp "请输入 Y/N (默认N): " enable
     case $enable in
     [yY])
-    systemctl enable xmrig
+    systemctl enable x
     ;;
     *)
     ;;
@@ -167,7 +168,7 @@ server_opt() {
     [nN])
     ;;
     *)
-    systemctl start xmrig
+    systemctl start x
     ;;
     esac
 }
@@ -175,15 +176,15 @@ server_opt() {
 show_info() {
     echo -e "================================"
     echo -e "启动xmrig:"
-    echo -e "systemctl start xmrig"
+    echo -e "systemctl start x"
     echo -e "停止xmrig:"
-    echo -e "systemctl stop xmrig"
+    echo -e "systemctl stop x"
     echo -e "查看xmrig状态:"
-    echo -e "systemctl status xmrig"
+    echo -e "systemctl status x"
     echo -e "开机自启:"
-    echo -e "systemctl enable xmrig"
+    echo -e "systemctl enable x"
     echo -e "关闭开机自启:"
-    echo -e "systemctl disable xmrig"
+    echo -e "systemctl disable x"
     echo -e "================================"
 }
 
