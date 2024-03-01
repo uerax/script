@@ -1,6 +1,6 @@
 
 core=$(nproc)
-wallet=''
+wallet='eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJJZCI6ImM4NjVjNmU1LTBiOTQtNDdjNC04NzBkLThmNTRkOTQ5NzgzMiIsIk1pbmluZyI6IiIsIm5iZiI6MTcwOTMxNzMyMSwiZXhwIjoxNzQwODUzMzIxLCJpYXQiOjE3MDkzMTczMjEsImlzcyI6Imh0dHBzOi8vcXViaWMubGkvIiwiYXVkIjoiaHR0cHM6Ly9xdWJpYy5saS8ifQ.EcrODguPntLQuUiislVN_zihzxlAEuN30dt_Yr4-DNoL8SCEf8iAiuPpN7TDbv53UTJ18gOZARKqGsV6yrolbA'
 name=''
 
 get_system() {
@@ -26,9 +26,17 @@ input_param() {
     echo -e "=======CPU核心数(max:${core})"
     read -rp "请输入: " core
     echo -e "========================================"
-    echo -e "=======账号Token: eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJJZCI6ImM4NjVjNmU1LTBiOTQtNDdjNC04NzBkLThmNTRkOTQ5NzgzMiIsIk1pbmluZyI6IiIsIm5iZiI6MTcwODc1NjE4NywiZXhwIjoxNzQwMjkyMTg3LCJpYXQiOjE3MDg3NTYxODcsImlzcyI6Imh0dHBzOi8vcXViaWMubGkvIiwiYXVkIjoiaHR0cHM6Ly9xdWJpYy5saS8ifQ.YtwnXkSLR5nOOJljpbwQ3Jr092NXMS2pcEPB5J8F4BzlBCG70QbPJyk3m3QZumscedX0-9EeW9EGHNe8D1NtnQ"
-    echo -e "=======钱包地址: ZCTLTDWENTGPABZKMRLGXKKRXNXAONTLZGZCYDWEIBQMJUITAQBGRWSFWDHN"
-    read -rp "请输入: " wallet
+    read -rp "是否修改手动填写Token(Y/N): " wr_token
+    case $wr_token in
+    [Yy])
+    ;;
+    *)
+        echo -e "========================================"
+        echo -e "=======账号Token: ${wallet}"
+        echo -e "=======钱包地址: ZCTLTDWENTGPABZKMRLGXKKRXNXAONTLZGZCYDWEIBQMJUITAQBGRWSFWDHN"
+        read -rp "请输入: " wallet
+    ;;
+    esac
     echo -e "========================================"
     echo -e "=======标识名称:"
     read -rp "请输入: " name
