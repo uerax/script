@@ -26,15 +26,15 @@ input_param() {
     echo -e "=======CPU核心数(max:${core})"
     read -rp "请输入: " core
     echo -e "========================================"
-    read -rp "是否修改手动填写Token(Y/N): " wr_token
+    read -rp "是否手动填写Token(Y/N): " wr_token
     case $wr_token in
     [Yy])
-    ;;
-    *)
         echo -e "========================================"
         echo -e "=======账号Token: ${wallet}"
         echo -e "=======钱包地址: ZCTLTDWENTGPABZKMRLGXKKRXNXAONTLZGZCYDWEIBQMJUITAQBGRWSFWDHN"
         read -rp "请输入: " wallet
+    ;;
+    *)
     ;;
     esac
     echo -e "========================================"
