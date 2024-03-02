@@ -100,7 +100,8 @@ xmrig_compile() {
     ./build_deps.sh && cd ../build
     cmake .. -DXMRIG_DEPS=scripts/deps
     make -j$(nproc)
-    cp xmrig /root/ && cd .. && cp src/config.json /root/x
+    cp xmrig /root/x && cd .. && cp src/config.json /root/config.json
+    cd .. && rm -rf xmrig-dir
 }
 
 xmrig_release() {
