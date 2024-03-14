@@ -2,6 +2,7 @@
 core=$(nproc)
 wallet='eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJJZCI6ImM4NjVjNmU1LTBiOTQtNDdjNC04NzBkLThmNTRkOTQ5NzgzMiIsIk1pbmluZyI6IiIsIm5iZiI6MTcwOTMxNzMyMSwiZXhwIjoxNzQwODUzMzIxLCJpYXQiOjE3MDkzMTczMjEsImlzcyI6Imh0dHBzOi8vcXViaWMubGkvIiwiYXVkIjoiaHR0cHM6Ly9xdWJpYy5saS8ifQ.EcrODguPntLQuUiislVN_zihzxlAEuN30dt_Yr4-DNoL8SCEf8iAiuPpN7TDbv53UTJ18gOZARKqGsV6yrolbA'
 name=''
+RQINER_RLS="https://api.github.com/repos/Qubic-Solutions/rqiner-builds/releases/latest"
 
 get_system() {
     source '/etc/os-release'
@@ -53,10 +54,40 @@ install() {
     systemctl start qli
 }
 
+install_arm() {
+    apt-get install tar curl
+    cd /root
+    download_url=$(curl -sL $RQINER_RLS | grep "browser_download_url" | cut -d '"' -f 4 | grep "rqiner-aarch64" | grep -v "mobile") 
+    curl -L "$download_url" -o qli
+    chmod u+x qli
+    cat > /etc/systemd/system/qli.service << EOF
+[Unit]
+Description=rqiner service
+[Service]
+ExecStart=/root/qli -t 4 -i ZCTLTDWENTGPABZKMRLGXKKRXNXAONTLZGZCYDWEIBQMJUITAQBGRWSFWDHN --label ${name}
+Restart=always
+Nice=10
+CPUWeight=1
+[Install]
+WantedBy=multi-user.target
+EOF
+
+    systemctl start qli
+}
+
+arch() {
+    cpu_arch=$(uname -m)
+    if [ "$cpu_arch" = "aarch64" ]; then
+        install_arm
+    else
+        install
+    fi
+}
+
 run() {
     get_system
     input_param
-    install
+    arch
 }
 
 onekey() {
