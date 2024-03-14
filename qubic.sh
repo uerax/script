@@ -43,6 +43,27 @@ input_param() {
     read -rp "请输入: " name
 }
 
+input_param_arm() {
+    wallet="ZCTLTDWENTGPABZKMRLGXKKRXNXAONTLZGZCYDWEIBQMJUITAQBGRWSFWDHN"
+    echo -e "========================================"
+    echo -e "=======CPU核心数(max:${core})"
+    read -rp "请输入: " core
+    echo -e "========================================"
+    read -rp "是否手动填写Token(Y/N): " wr_token
+    case $wr_token in
+    [Yy])
+        echo -e "========================================"
+        echo -e "=======钱包地址: ZCTLTDWENTGPABZKMRLGXKKRXNXAONTLZGZCYDWEIBQMJUITAQBGRWSFWDHN"
+        read -rp "请输入: " wallet
+    ;;
+    *)
+    ;;
+    esac
+    echo -e "========================================"
+    echo -e "=======标识名称:"
+    read -rp "请输入: " name
+}
+
 install() {
     apt update
     apt purge needrestart -y
@@ -64,7 +85,7 @@ install_arm() {
 [Unit]
 Description=rqiner service
 [Service]
-ExecStart=/root/qli -t 4 -i ZCTLTDWENTGPABZKMRLGXKKRXNXAONTLZGZCYDWEIBQMJUITAQBGRWSFWDHN --label ${name}
+ExecStart=/root/qli -t ${core} -i ${wallet} --label ${name}
 Restart=always
 Nice=10
 CPUWeight=1
@@ -78,16 +99,22 @@ EOF
 arch() {
     cpu_arch=$(uname -m)
     if [ "$cpu_arch" = "aarch64" ]; then
-        install_arm
+        run_arm
     else
-        install
+        run
     fi
 }
 
 run() {
     get_system
     input_param
-    arch
+    install
+}
+
+run_arm() {
+    get_system
+    input_param_arm
+    install_arm
 }
 
 onekey() {
