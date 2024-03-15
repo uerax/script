@@ -76,6 +76,7 @@ install() {
 }
 
 install_arm() {
+    CPUQuota="CPUQuota=${core}00%"
     apt-get install tar curl
     cd /root
     download_url=$(curl -sL $RQINER_RLS | grep "browser_download_url" | cut -d '"' -f 4 | grep "rqiner-aarch64" | grep -v "mobile") 
@@ -87,6 +88,7 @@ Description=rqiner service
 [Service]
 ExecStart=/root/qli -t ${core} -i ${wallet} --label ${name}
 Restart=always
+${CPUQuota}
 Nice=10
 CPUWeight=1
 [Install]
