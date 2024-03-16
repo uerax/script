@@ -138,6 +138,6 @@ case $1 in
         onekey $2 $3 $4
         ;;
     *)
-        run
+        arch
         ;;
 esac
