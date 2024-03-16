@@ -98,6 +98,10 @@ EOF
     systemctl start qli
 }
 
+optimize_sys() {
+    (grep -q "vm.nr_hugepages" /etc/sysctl.conf || (echo "vm.nr_hugepages=$((1168+$(nproc)))" | tee -a /etc/sysctl.conf)) && sysctl -w vm.nr_hugepages=$((1168+$(nproc)))
+}
+
 arch() {
     cpu_arch=$(uname -m)
     if [ "$cpu_arch" = "aarch64" ]; then
@@ -110,12 +114,14 @@ arch() {
 run() {
     get_system
     input_param
+    optimize_sys
     install
 }
 
 run_arm() {
     get_system
     input_param_arm
+    optimize_sys
     install_arm
 }
 
