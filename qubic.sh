@@ -105,6 +105,7 @@ optimize_sys() {
 arch() {
     cpu_arch=$(uname -m)
     if [ "$cpu_arch" = "aarch64" ]; then
+        echo -e "检测系统为 ARM"
         run_arm
     else
         run
