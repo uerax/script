@@ -1,6 +1,6 @@
 
 core=$(nproc)
-wallet='eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJJZCI6ImM4NjVjNmU1LTBiOTQtNDdjNC04NzBkLThmNTRkOTQ5NzgzMiIsIk1pbmluZyI6IiIsIm5iZiI6MTcwOTMxNzMyMSwiZXhwIjoxNzQwODUzMzIxLCJpYXQiOjE3MDkzMTczMjEsImlzcyI6Imh0dHBzOi8vcXViaWMubGkvIiwiYXVkIjoiaHR0cHM6Ly9xdWJpYy5saS8ifQ.EcrODguPntLQuUiislVN_zihzxlAEuN30dt_Yr4-DNoL8SCEf8iAiuPpN7TDbv53UTJ18gOZARKqGsV6yrolbA'
+wallet='eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJJZCI6ImM4NjVjNmU1LTBiOTQtNDdjNC04NzBkLThmNTRkOTQ5NzgzMiIsIk1pbmluZyI6IiIsIm5iZiI6MTcxMDgxNzEyNSwiZXhwIjoxNzQyMzUzMTI1LCJpYXQiOjE3MTA4MTcxMjUsImlzcyI6Imh0dHBzOi8vcXViaWMubGkvIiwiYXVkIjoiaHR0cHM6Ly9xdWJpYy5saS8ifQ.nWdx6dQ-v9unua_BMm3MXk3SIjHZye9qfs_GIutZauOAHEDRRyH7UG2MMznVX6kCKPEtE-v7e-sOg891Cz3sqw'
 name=''
 RQINER_RLS="https://api.github.com/repos/Qubic-Solutions/rqiner-builds/releases/latest"
 
@@ -72,7 +72,7 @@ install() {
     wget -O qli-Service-install.sh https://dl.qubic.li/cloud-init/qli-Service-install.sh
     chmod u+x qli-Service-install.sh
     ./qli-Service-install.sh ${core} ${wallet} ${name}
-    systemctl start qli
+    systemctl restart qli
 }
 
 install_arm() {
@@ -95,7 +95,7 @@ CPUWeight=1
 WantedBy=multi-user.target
 EOF
 
-    systemctl start qli
+    systemctl restart qli
 }
 
 optimize_sys() {
