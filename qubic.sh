@@ -112,6 +112,16 @@ arch() {
     fi
 }
 
+arch_update() {
+    cpu_arch=$(uname -m)
+    if [ "$cpu_arch" = "aarch64" ]; then
+        echo -e "检测系统为 ARM"
+        update_arm
+    else
+        update
+    fi
+}
+
 run() {
     get_system
     input_param
@@ -126,6 +136,25 @@ run_arm() {
     install_arm
 }
 
+update_arm() {
+    systemctl stop qli
+    cd /root
+    download_url=$(curl -sL $RQINER_RLS | grep "browser_download_url" | cut -d '"' -f 4 | grep "rqiner-aarch64" | grep -v "mobile") 
+    curl -L "$download_url" -o qli
+    chmod u+x qli
+    systemctl start qli
+}
+
+update() {
+    systemctl stop qli
+    cp /q/appsettings.json /q/appsettings.json.bak
+    wget -O qli-Service-install.sh https://dl.qubic.li/cloud-init/qli-Service-install.sh
+    chmod u+x qli-Service-install.sh
+    ./qli-Service-install.sh 1 1 1
+    mv /q/appsettings.json.bak /q/appsettings.json
+    systemctl start qli
+}
+
 onekey() {
     get_system
     core="$1"
@@ -137,6 +166,9 @@ onekey() {
 case $1 in
     onekey)
         onekey $2 $3 $4
+        ;;
+    update)
+        arch_update
         ;;
     *)
         arch
