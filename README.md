@@ -57,6 +57,14 @@ bash <(wget --no-check-certificate -qO- 'https://mirror.ghproxy.com/https://raw.
 
 ***
 
+__甲骨文机器基本功能安装__
+
+```
+bash -c "$(curl -L https://cdn.jsdelivr.net/gh/uerax/script@master/oracle.sh)" @
+```
+
+***
+
 ## Mining
 
 __一键安装 Xmrig 脚本 (randomx, ghostrider, cryptonight...)__
