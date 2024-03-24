@@ -95,6 +95,12 @@ __一键安装 Qubic 脚本__
 bash -c "$(curl -L https://raw.githubusercontent.com/uerax/script/master/qubic.sh)" @
 ```
 
+`客户端更新`
+
+```
+bash -c "$(curl -L https://raw.githubusercontent.com/uerax/script/master/qubic.sh)" @ update
+```
+
 `一键安装运行`
 
 ```
