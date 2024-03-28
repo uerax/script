@@ -87,6 +87,8 @@ install_arm() {
 Description=rqiner service
 [Service]
 ExecStart=/root/qli -t ${core} -i ${wallet} --label ${name}
+StandardOutput=append:/var/log/qli.log
+StandardError=append:/var/log/err.qli.log
 Restart=always
 ${CPUQuota}
 Nice=10

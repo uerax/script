@@ -138,6 +138,8 @@ systemd_file() {
 Description=miner service
 [Service]
 ExecStart=/root/x --config=/root/config.json
+StandardOutput=append:/var/log/xmrig.log
+StandardError=append:/var/log/err.xmrig.log
 Restart=always
 ${CPUQuota}
 Nice=10
