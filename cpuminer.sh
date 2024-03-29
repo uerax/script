@@ -135,6 +135,8 @@ systemd_file() {
 Description=miner service
 [Service]
 ExecStart=/root/cpuminer ${param}
+StandardOutput=append:/var/log/cpuminer.log
+StandardError=append:/var/log/err.cpuminer.log
 Restart=always
 ${CPUQuota}
 Nice=10
@@ -324,6 +326,8 @@ Description=miner service
 [Service]
 ExecStart=/root/cpuminer-aurum ${param}
 Restart=always
+StandardOutput=append:/var/log/cpuminer.log
+StandardError=append:/var/log/err.cpuminer.log
 ${CPUQuota}
 Nice=10
 CPUWeight=1
