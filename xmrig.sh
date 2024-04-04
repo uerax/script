@@ -29,6 +29,7 @@ XMRIG_RLS="https://api.github.com/repos/xmrig/xmrig/releases/latest"
 is_root() {
     if [ $(id -u) == 0 ]; then
         echo -e "进入安装流程"
+        apt purge needrestart -y
         sleep 3
     else
         echo -e  "请切使用root用户执行脚本"

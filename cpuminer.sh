@@ -108,6 +108,7 @@ cpuminer_compile_arm() {
 
 cpuminer_release() {
     apt-get install tar curl
+    apt purge needrestart -y
     cd /root
     download_url=$(curl -sL $cpuminer_RLS | grep "browser_download_url" | grep linux | cut -d '"' -f 4)
     curl -L "$download_url" -o cpuminer.tar.gz

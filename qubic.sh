@@ -141,7 +141,7 @@ run_arm() {
 update_arm() {
     systemctl stop qli
     cd /root
-    download_url=$(curl -sL $RQINER_RLS | grep "browser_download_url" | cut -d '"' -f 4 | grep "rqiner-aarch64" | grep -v "mobile") 
+    download_url=$(curl -sL $RQINER_RLS | grep "browser_download_url" | cut -d '"' -f 4 | grep "rqiner-aarch64" | head -n1) 
     curl -L "$download_url" -o qli
     chmod u+x qli
     systemctl start qli
