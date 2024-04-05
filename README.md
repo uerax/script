@@ -108,3 +108,12 @@ bash -c "$(curl -L https://raw.githubusercontent.com/uerax/script/master/qubic.s
 ```
 
 ***
+
+__一键安装 Ore 脚本__
+
+```
+bash -c "$(curl -L https://raw.githubusercontent.com/uerax/script/master/ore.sh)" @
+```
+
+***
+
