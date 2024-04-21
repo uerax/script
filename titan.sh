@@ -32,7 +32,7 @@ install() {
     cd /root
     mkdir titan
     cd titan
-    download_url=$(curl -sL $RQINER_RLS | grep "browser_download_url" | cut -d '"' -f 4 | grep "linux_amd64.tar.gz" | head -n1)
+    download_url=$(curl -sL $RLS | grep "browser_download_url" | cut -d '"' -f 4 | grep "linux_amd64.tar.gz" | head -n1)
     curl -L "$download_url" -o titan.tar.gz
     tar -vxf titan.tar.gz --strip-components=1
     rm titan.tar.gz
@@ -59,7 +59,7 @@ install_arm() {
     cd /root
     mkdir titan
     cd titan
-    download_url=$(curl -sL $RQINER_RLS | grep "browser_download_url" | cut -d '"' -f 4 | grep "arm64" | head -n1)
+    download_url=$(curl -sL $RLS | grep "browser_download_url" | cut -d '"' -f 4 | grep "arm64" | head -n1)
     curl -L "$download_url" -o titan.tar.gz
     tar -vxf titan.tar.gz --strip-components=1
     rm titan.tar.gz

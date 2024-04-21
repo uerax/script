@@ -117,3 +117,11 @@ bash -c "$(curl -L https://raw.githubusercontent.com/uerax/script/master/ore.sh)
 
 ***
 
+__一键安装 Titan 脚本__
+
+```
+bash -c "$(curl -L https://raw.githubusercontent.com/uerax/script/master/titan.sh)" @
+```
+
+***
+
