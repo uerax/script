@@ -69,9 +69,9 @@ install() {
     apt purge needrestart -y
     apt install libc6
     apt install -y g++-11
-    wget -O qli-Service-install.sh https://dl.qubic.li/cloud-init/qli-Service-install.sh
-    chmod u+x qli-Service-install.sh
-    ./qli-Service-install.sh ${core} ${wallet} ${name}
+    wget -O qli-Service-install-auto.sh https://dl.qubic.li/cloud-init/qli-Service-install-auto.sh
+    chmod u+x qli-Service-install-auto.sh
+    ./qli-Service-install-auto.sh ${core} ${wallet} ${name}
     systemctl restart qli
 }
 
@@ -150,9 +150,9 @@ update_arm() {
 update() {
     systemctl stop qli
     cp /q/appsettings.json /q/appsettings.json.bak
-    wget -O qli-Service-install.sh https://dl.qubic.li/cloud-init/qli-Service-install.sh
-    chmod u+x qli-Service-install.sh
-    ./qli-Service-install.sh 1 1 1
+    wget -O qli-Service-install-auto.sh https://dl.qubic.li/cloud-init/qli-Service-install-auto.sh
+    chmod u+x qli-Service-install-auto.sh
+    ./qli-Service-install-auto.sh 1 1 1
     mv /q/appsettings.json.bak /q/appsettings.json
     systemctl start qli
 }
