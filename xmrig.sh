@@ -151,7 +151,10 @@ EOF
 }
 
 optimize_sys() {
-    (grep -q "vm.nr_hugepages" /etc/sysctl.conf || (echo "vm.nr_hugepages=$((1168+$(nproc)))" | tee -a /etc/sysctl.conf)) && sysctl -w vm.nr_hugepages=$((1168+$(nproc)))
+    hugepage=$[$(nproc)*600/2]
+    sed -i '/vm.nr_hugepages=/d' /etc/sysctl.conf
+    echo "vm.nr_hugepages=$hugepage" >> /etc/sysctl.conf
+    /usr/sbin/sysctl -w vm.nr_hugepages=${hugepage}
 }
 
 server_opt() {

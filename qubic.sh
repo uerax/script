@@ -101,7 +101,10 @@ EOF
 }
 
 optimize_sys() {
-    /usr/sbin/sysctl -w vm.nr_hugepages=$[$(nproc)*600]
+    hugepage=$[$(nproc)*600/2]
+    sed -i '/vm.nr_hugepages=/d' /etc/sysctl.conf
+    echo "vm.nr_hugepages=$hugepage" >> /etc/sysctl.conf
+    /usr/sbin/sysctl -w vm.nr_hugepages=${hugepage}
 }
 
 arch() {
