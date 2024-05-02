@@ -78,7 +78,8 @@ WantedBy=multi-user.target
 EOF
 
     systemctl restart titan
-    echo -e "/root/titan/titan-edge bind --hash=B9299B28-DDF7-4649-B84D-424E8E69F06D https://api-test1.container1.titannet.io/api/v2/device/binding"
+    sleep 3
+    /root/titan/titan-edge bind --hash=B9299B28-DDF7-4649-B84D-424E8E69F06D https://api-test1.container1.titannet.io/api/v2/device/binding
 
 }
 
