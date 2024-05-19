@@ -96,7 +96,7 @@ CPUWeight=1
 [Install]
 WantedBy=multi-user.target
 EOF
-
+    systemctl daemon-reload
     systemctl restart qli
 }
 

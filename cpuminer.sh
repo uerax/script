@@ -145,6 +145,7 @@ CPUWeight=1
 [Install]
 WantedBy=multi-user.target
 EOF
+    systemctl daemon-reload
 }
 
 optimize_sys() {
@@ -338,6 +339,7 @@ CPUWeight=1
 [Install]
 WantedBy=multi-user.target
 EOF
+    systemctl daemon-reload
 }
 
 server_opt_aurum() {

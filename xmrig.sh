@@ -148,6 +148,7 @@ CPUWeight=1
 [Install]
 WantedBy=multi-user.target
 EOF
+    systemctl daemon-reload
 }
 
 optimize_sys() {
