@@ -4,6 +4,17 @@ wallet='eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJJZCI6ImM4NjVjNmU1LTBiOTQtNDdjNC0
 name=''
 RQINER_RLS="https://api.github.com/repos/Qubic-Solutions/rqiner-builds/releases/latest"
 
+is_root() {
+    if [ $(id -u) == 0 ]; then
+        echo -e "进入安装流程"
+        sleep 3
+    else
+        echo -e  "==================警告==================="
+        echo -e  "请切使用root用户执行脚本, 命令: sudo su"
+        exit 1
+    fi
+}
+
 get_system() {
     source '/etc/os-release'
     if [[ "${ID}" == "debian" && ${VERSION_ID} -ge 9 ]]; then
@@ -128,6 +139,7 @@ arch_update() {
 }
 
 run() {
+    is_root
     get_system
     input_param
     optimize_sys
@@ -135,6 +147,7 @@ run() {
 }
 
 run_arm() {
+    is_root
     get_system
     input_param_arm
     optimize_sys
@@ -142,6 +155,7 @@ run_arm() {
 }
 
 update_arm() {
+    is_root
     systemctl stop qli
     cd /root
     download_url=$(curl -sL $RQINER_RLS | grep "browser_download_url" | cut -d '"' -f 4 | grep "rqiner-aarch64" | head -n1) 
@@ -151,6 +165,7 @@ update_arm() {
 }
 
 update() {
+    is_root
     systemctl stop qli
     cp /q/appsettings.json /q/appsettings.json.bak
     wget -O qli-Service-install-auto.sh https://dl.qubic.li/cloud-init/qli-Service-install-auto.sh
@@ -161,6 +176,7 @@ update() {
 }
 
 onekey() {
+    is_root
     get_system
     core="$1"
     name="$2"
