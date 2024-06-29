@@ -22,11 +22,11 @@ install_pool() {
     cd /root
     mkdir aleo
     cd aleo
-    download_url=$(curl -sL $RLS | grep "browser_download_url" | cut -d '"' -f 4 | grep "pool")
-    curl -L "$download_url"
+    download_url=$(curl -sL $RLS | grep "browser_download_url" | cut -d '"' -f 4 | grep "pool" | head -n1)
+    curl -O "$download_url"
     chmod +x aleo-pool-prover
-    download_url=$(curl -sL $RLS | grep "browser_download_url" | cut -d '"' -f 4 | grep "license")
-    curl -L "$download_url"
+    download_url=$(curl -sL $RLS | grep "browser_download_url" | cut -d '"' -f 4 | grep "license" | head -n1)
+    curl -O "$download_url"
     chmod +r license
 
     cat > /etc/systemd/system/aleo.service << EOF
@@ -52,11 +52,11 @@ install_solo() {
     cd /root
     mkdir aleo
     cd aleo
-    download_url=$(curl -sL $RLS | grep "browser_download_url" | cut -d '"' -f 4 | grep "solo")
-    curl -L "$download_url"
+    download_url=$(curl -sL $RLS | grep "browser_download_url" | cut -d '"' -f 4 | grep "solo" | head -n1)
+    curl -O "$download_url"
     chmod +x aleo-solo-prover
-    download_url=$(curl -sL $RLS | grep "browser_download_url" | cut -d '"' -f 4 | grep "license")
-    curl -L "$download_url"
+    download_url=$(curl -sL $RLS | grep "browser_download_url" | cut -d '"' -f 4 | grep "license" | head -n1)
+    curl -O "$download_url"
     chmod +r license
 
     cat > /etc/systemd/system/aleo.service << EOF
