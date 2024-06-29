@@ -30,7 +30,7 @@ arch() {
 install() {
     apt-get install tar curl
     cd /root
-    mkdir titan
+    mkdir -p titan
     cd titan
     download_url=$(curl -sL $RLS | grep "browser_download_url" | cut -d '"' -f 4 | grep "linux_amd64.tar.gz" | head -n1)
     curl -L "$download_url" -o titan.tar.gz
@@ -57,7 +57,7 @@ EOF
 install_arm() {
     apt-get install tar curl
     cd /root
-    mkdir titan
+    mkdir -p titan
     cd titan
     download_url=$(curl -sL $RLS | grep "browser_download_url" | cut -d '"' -f 4 | grep "arm64" | head -n1)
     curl -L "$download_url" -o titan.tar.gz
