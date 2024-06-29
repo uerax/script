@@ -18,15 +18,15 @@ get_system() {
 }
 
 install_pool() {
-    apt-get install curl
+    apt-get install curl wget
     cd /root
     mkdir aleo
     cd aleo
     download_url=$(curl -sL $RLS | grep "browser_download_url" | cut -d '"' -f 4 | grep "pool" | head -n1)
-    curl -O "$download_url"
+    wget "$download_url"
     chmod +x aleo-pool-prover
     download_url=$(curl -sL $RLS | grep "browser_download_url" | cut -d '"' -f 4 | grep "license" | head -n1)
-    curl -O "$download_url"
+    wget "$download_url"
     chmod +r license
 
     cat > /etc/systemd/system/aleo.service << EOF
@@ -48,15 +48,15 @@ EOF
 }
 
 install_solo() {
-    apt-get install curl
+    apt-get install curl wget
     cd /root
     mkdir aleo
     cd aleo
     download_url=$(curl -sL $RLS | grep "browser_download_url" | cut -d '"' -f 4 | grep "solo" | head -n1)
-    curl -O "$download_url"
+    wget "$download_url"
     chmod +x aleo-solo-prover
     download_url=$(curl -sL $RLS | grep "browser_download_url" | cut -d '"' -f 4 | grep "license" | head -n1)
-    curl -O "$download_url"
+    wget "$download_url"
     chmod +r license
 
     cat > /etc/systemd/system/aleo.service << EOF
