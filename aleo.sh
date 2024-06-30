@@ -114,6 +114,7 @@ case $1 in
     ;;
     1to)
         install_1to
+    ;;
     *)
         install_1to
     ;;
