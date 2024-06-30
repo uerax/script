@@ -34,7 +34,7 @@ install_pool() {
 Description=aleo service
 [Service]
 WorkingDirectory=/root/aleo
-ExecStart=/root/aleo/aleo-pool-prover--pool wss://aleo.zkrush.com:3333 --account ddbehead --worker-name aleo
+ExecStart=/root/aleo/aleo-pool-prover --pool wss://aleo.zkrush.com:3333 --account ddbehead --worker-name aleo
 StandardOutput=append:/var/log/aleo.log
 StandardError=append:/var/log/err.aleo.log
 Restart=always
