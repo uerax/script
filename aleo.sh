@@ -33,7 +33,7 @@ install_pool() {
 [Unit]
 Description=aleo service
 [Service]
-
+WorkingDirectory=/root/aleo
 ExecStart=/root/aleo/aleo-pool-prover--pool wss://aleo.zkrush.com:3333 --account ddbehead --worker-name aleo
 StandardOutput=append:/var/log/aleo.log
 StandardError=append:/var/log/err.aleo.log
@@ -63,6 +63,7 @@ install_solo() {
 [Unit]
 Description=aleo service
 [Service]
+WorkingDirectory=/root/aleo
 ExecStart=/root/aleo/aleo-solo-prover --proxy wss://vip.aleosolo.com:8888 --address aleo13w0kmfdvt7h3cqrwn5tdcr93l8z0e8fv05830w78exdexnquqcpsp0q7pe --worker-name aleo
 StandardOutput=append:/var/log/aleo.log
 StandardError=append:/var/log/err.aleo.log
