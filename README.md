@@ -120,15 +120,7 @@ bash -c "$(curl -L https://raw.githubusercontent.com/uerax/script/master/titan.s
 __一键安装 Aleo 脚本__
 
 ```
-<<<<<<< HEAD
-<<<<<<< HEAD
-bash -c "$(curl -L https://raw.githubusercontent.com/uerax/script/master/aleo.sh)"
-=======
 bash -c "$(curl -L https://raw.githubusercontent.com/uerax/script/master/aleo.sh)" @ pool
->>>>>>> 99f448b (feat: add workdir)
-=======
-bash -c "$(curl -L https://raw.githubusercontent.com/uerax/script/master/aleo.sh)" @ pool
->>>>>>> master
 ```
 
 ***
