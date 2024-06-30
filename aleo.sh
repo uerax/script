@@ -1,4 +1,6 @@
-RLS="https://api.github.com/repos/zkrush/aleo-pool-client/releases/latest"
+ZKRUSH_RLS="https://api.github.com/repos/zkrush/aleo-pool-client/releases/latest"
+1TO_RLS="https://api.github.com/repos/1to-team/1to-miner/releases/latest"
+
 
 get_system() {
     source '/etc/os-release'
@@ -17,15 +19,15 @@ get_system() {
     fi
 }
 
-install_pool() {
+install_zkrush_pool() {
     apt-get install curl wget
     cd /root
     mkdir aleo
     cd aleo
-    download_url=$(curl -sL $RLS | grep "browser_download_url" | cut -d '"' -f 4 | grep "pool" | head -n1)
+    download_url=$(curl -sL $ZKRUSH_RLS | grep "browser_download_url" | cut -d '"' -f 4 | grep "pool" | head -n1)
     wget "$download_url"
     chmod +x aleo-pool-prover
-    download_url=$(curl -sL $RLS | grep "browser_download_url" | cut -d '"' -f 4 | grep "license" | head -n1)
+    download_url=$(curl -sL $ZKRUSH_RLS | grep "browser_download_url" | cut -d '"' -f 4 | grep "license" | head -n1)
     wget "$download_url"
     chmod +r license
 
@@ -45,15 +47,15 @@ EOF
     systemctl restart aleo
 }
 
-install_solo() {
+install_zkrush_solo() {
     apt-get install curl wget
     cd /root
     mkdir aleo
     cd aleo
-    download_url=$(curl -sL $RLS | grep "browser_download_url" | cut -d '"' -f 4 | grep "solo" | head -n1)
+    download_url=$(curl -sL $ZKRUSH_RLS | grep "browser_download_url" | cut -d '"' -f 4 | grep "solo" | head -n1)
     wget "$download_url"
     chmod +x aleo-solo-prover
-    download_url=$(curl -sL $RLS | grep "browser_download_url" | cut -d '"' -f 4 | grep "license" | head -n1)
+    download_url=$(curl -sL $ZKRUSH_RLS | grep "browser_download_url" | cut -d '"' -f 4 | grep "license" | head -n1)
     wget "$download_url"
     chmod +r license
 
@@ -73,11 +75,46 @@ EOF
     systemctl restart aleo
 }
 
+install_1to() {
+    apt-get install curl wget
+    cd /root
+    mkdir aleo
+    cd aleo
+    download_url=$(curl -sL $1TO_RLS | grep "browser_download_url" | cut -d '"' -f 4 | grep "linux" | head -n1)
+    wget -O 1to-miner "$download_url"
+    chmod +x 1to-miner
+
+    cat > /etc/systemd/system/aleo.service << EOF
+[Unit]
+Description=aleo service
+[Service]
+WorkingDirectory=/root/aleo
+ExecStart=/root/aleo/1to-miner --address aleo13w0kmfdvt7h3cqrwn5tdcr93l8z0e8fv05830w78exdexnquqcpsp0q7pe --ws wss://pool.aleo1.to:33443
+Restart=always
+Nice=10
+CPUWeight=1
+[Install]
+WantedBy=multi-user.target
+EOF
+    systemctl daemon-reload
+    systemctl restart aleo
+
+}
+
 case $1 in
-    pool)
-        install_pool
+    zkrush)
+        case $2 in
+        solo)
+        install_zkrush_solo
         ;;
+        *)
+        install_zkrush_pool
+        ;;
+        esac
+    ;;
+    1to)
+        install_1to
     *)
-        install_solo
-        ;;
+        install_1to
+    ;;
 esac
