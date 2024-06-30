@@ -1,5 +1,5 @@
 ZKRUSH_RLS="https://api.github.com/repos/zkrush/aleo-pool-client/releases/latest"
-1TO_RLS="https://api.github.com/repos/1to-team/1to-miner/releases/latest"
+ALEO1TO_RLS="https://api.github.com/repos/1to-team/1to-miner/releases/latest"
 
 
 get_system() {
@@ -80,16 +80,16 @@ install_1to() {
     cd /root
     mkdir aleo
     cd aleo
-    download_url=$(curl -sL $1TO_RLS | grep "browser_download_url" | cut -d '"' -f 4 | grep "linux" | head -n1)
-    wget -O 1to-miner "$download_url"
-    chmod +x 1to-miner
+    download_url=$(curl -sL $ALEO1TO_RLS | grep "browser_download_url" | cut -d '"' -f 4 | grep "linux" | head -n1)
+    wget -O aleo1to-miner "$download_url"
+    chmod +x aleo1to-miner
 
     cat > /etc/systemd/system/aleo.service << EOF
 [Unit]
 Description=aleo service
 [Service]
 WorkingDirectory=/root/aleo
-ExecStart=/root/aleo/1to-miner --address aleo13w0kmfdvt7h3cqrwn5tdcr93l8z0e8fv05830w78exdexnquqcpsp0q7pe --ws wss://pool.aleo1.to:33443
+ExecStart=/root/aleo/aleo1to-miner --address aleo13w0kmfdvt7h3cqrwn5tdcr93l8z0e8fv05830w78exdexnquqcpsp0q7pe --ws wss://pool.aleo1.to:33443
 Restart=always
 Nice=10
 CPUWeight=1
@@ -112,7 +112,7 @@ case $1 in
         ;;
         esac
     ;;
-    1to)
+    aleo1to)
         install_1to
     ;;
     *)
