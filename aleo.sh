@@ -29,7 +29,22 @@ install_pool() {
     wget "$download_url"
     chmod +r license
 
-    echo "./aleo-pool-prover --pool wss://aleo.zkrush.com:3333 --account ddbehead --worker-name aleo"
+    cat > /etc/systemd/system/aleo.service << EOF
+[Unit]
+Description=aleo service
+[Service]
+WorkingDirectory=/root/aleo
+ExecStart=/root/aleo/aleo-pool-prover--pool wss://aleo.zkrush.com:3333 --account ddbehead --worker-name aleo
+StandardOutput=append:/var/log/aleo.log
+StandardError=append:/var/log/err.aleo.log
+Restart=always
+Nice=10
+CPUWeight=1
+[Install]
+WantedBy=multi-user.target
+EOF
+    systemctl daemon-reload
+    systemctl restart aleo
 }
 
 install_solo() {
@@ -44,7 +59,22 @@ install_solo() {
     wget "$download_url"
     chmod +r license
 
-    echo "./aleo-solo-prover --proxy wss://vip.aleosolo.com:8888 --address aleo13w0kmfdvt7h3cqrwn5tdcr93l8z0e8fv05830w78exdexnquqcpsp0q7pe --worker-name aleo"
+    cat > /etc/systemd/system/aleo.service << EOF
+[Unit]
+Description=aleo service
+[Service]
+WorkingDirectory=/root/aleo
+ExecStart=/root/aleo/aleo-solo-prover --proxy wss://vip.aleosolo.com:8888 --address aleo13w0kmfdvt7h3cqrwn5tdcr93l8z0e8fv05830w78exdexnquqcpsp0q7pe --worker-name aleo
+StandardOutput=append:/var/log/aleo.log
+StandardError=append:/var/log/err.aleo.log
+Restart=always
+Nice=10
+CPUWeight=1
+[Install]
+WantedBy=multi-user.target
+EOF
+    systemctl daemon-reload
+    systemctl restart aleo
 }
 
 case $1 in
