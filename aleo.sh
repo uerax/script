@@ -25,10 +25,10 @@ install_zkrush_pool() {
     mkdir aleo
     cd aleo
     download_url=$(curl -sL $ZKRUSH_RLS | grep "browser_download_url" | cut -d '"' -f 4 | grep "pool" | head -n1)
-    wget "$download_url"
+    wget -O aleo-pool-prover "$download_url"
     chmod +x aleo-pool-prover
     download_url=$(curl -sL $ZKRUSH_RLS | grep "browser_download_url" | cut -d '"' -f 4 | grep "license" | head -n1)
-    wget "$download_url"
+    wget -O license "$download_url"
     chmod +r license
 
     cat > /etc/systemd/system/aleo.service << EOF
@@ -53,10 +53,10 @@ install_zkrush_solo() {
     mkdir aleo
     cd aleo
     download_url=$(curl -sL $ZKRUSH_RLS | grep "browser_download_url" | cut -d '"' -f 4 | grep "solo" | head -n1)
-    wget "$download_url"
+    wget -O aleo-solo-prover "$download_url"
     chmod +x aleo-solo-prover
     download_url=$(curl -sL $ZKRUSH_RLS | grep "browser_download_url" | cut -d '"' -f 4 | grep "license" | head -n1)
-    wget "$download_url"
+    wget -O license "$download_url"
     chmod +r license
 
     cat > /etc/systemd/system/aleo.service << EOF
