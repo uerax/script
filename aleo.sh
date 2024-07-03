@@ -25,6 +25,7 @@ install_zkrush_pool() {
     mkdir aleo
     cd aleo
     download_url=$(curl -sL $ZKRUSH_RLS | grep "browser_download_url" | cut -d '"' -f 4 | grep "pool" | head -n1)
+    systemctl stop aleo
     wget -O aleo-pool-prover "$download_url"
     chmod +x aleo-pool-prover
     download_url=$(curl -sL $ZKRUSH_RLS | grep "browser_download_url" | cut -d '"' -f 4 | grep "license" | head -n1)
@@ -52,6 +53,7 @@ install_zkrush_solo() {
     cd /root
     mkdir aleo
     cd aleo
+    systemctl stop aleo
     download_url=$(curl -sL $ZKRUSH_RLS | grep "browser_download_url" | cut -d '"' -f 4 | grep "solo" | head -n1)
     wget -O aleo-solo-prover "$download_url"
     chmod +x aleo-solo-prover
@@ -80,6 +82,7 @@ install_1to() {
     cd /root
     mkdir aleo
     cd aleo
+    systemctl stop aleo
     download_url=$(curl -sL $ALEO1TO_RLS | grep "browser_download_url" | cut -d '"' -f 4 | grep "linux" | head -n1)
     wget -O aleo1to-miner "$download_url"
     chmod +x aleo1to-miner
