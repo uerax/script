@@ -20,6 +20,10 @@ alias cd..='cd ..'
 
 alias gitignore='git update-index --assume-unchanged'
 alias noignore='git update-index --no-assume-unchanged'
+
+ssh_rm() {
+  grep "$1" ~/.ssh/known_hosts | cut -d ' ' -f 1 | xargs -I {} ssh-keygen -R {}
+}
 EOF
 
 source ~/.bashrc
