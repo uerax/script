@@ -81,6 +81,14 @@ bash -c "$(curl -L https://raw.githubusercontent.com/uerax/script/master/cpumine
 
 ***
 
+__一键安装 Zeph 脚本__
+
+```
+bash -c "$(curl -L https://raw.githubusercontent.com/uerax/script/master/zeph.sh)" @
+```
+
+***
+
 __一键安装 Qubic 脚本__
 
 ```
