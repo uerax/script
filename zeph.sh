@@ -38,7 +38,7 @@ get_system() {
 arch() {
     cpu_arch=$(uname -m)
     core_count=$(nproc)
-    if [ "$cpu_arch" = "aarch64" || "$core_count" -ge 3 ]; then
+    if [ "$cpu_arch" = "aarch64" ] || [ "$core_count" -ge 3 ]; then
         echo -e "检测系统为 ARM"
         xmrig_compile
     else 
