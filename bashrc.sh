@@ -1,6 +1,8 @@
 #!/bin/bash
 
-cat >> ~/.bashrc << EOF
+cd /root
+
+cat >> .bashrc << EOF
 alias ls='ls --color=auto'
 alias ll='ls -lh --color=auto'
 alias l='ls -lh --color=auto'
@@ -26,6 +28,6 @@ ssh_rm() {
 }
 EOF
 
-source ~/.bashrc
+source .bashrc
 
 echo -e "添加完成"
