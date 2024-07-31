@@ -386,8 +386,9 @@ go_release() {
 go_onekey() {
     POOL="$1"
     WALLET="$2"
-    ALGO="$3"
-    TLS="$4"
+    PASS="$3"
+    ALGO="$4"
+    TLS="$5"
     is_root
     get_system
     arch
@@ -438,7 +439,7 @@ case $1 in
         change_param_once_onekey $2 $3 $4 $5 $6
         ;;
     onekey)
-        go_onekey $2 $3 $4 $5
+        go_onekey $2 $3 $4 $5 $6
         ;;
     *)
         menu
