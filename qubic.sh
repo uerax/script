@@ -1,7 +1,7 @@
 
 core=$(nproc)
 wallet='eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJJZCI6ImM4NjVjNmU1LTBiOTQtNDdjNC04NzBkLThmNTRkOTQ5NzgzMiIsIk1pbmluZyI6IiIsIm5iZiI6MTcyMDE5MjgzNiwiZXhwIjoxNzUxNzI4ODM2LCJpYXQiOjE3MjAxOTI4MzYsImlzcyI6Imh0dHBzOi8vcXViaWMubGkvIiwiYXVkIjoiaHR0cHM6Ly9xdWJpYy5saS8ifQ.kSutnsJnBY8h3qwNxqwJbPvTmdiv98OzNMMCCUrtWg_0ejzu_FJfSwS27kSOA7HkhND32aP5oAJoDRalYHG4cQ'
-name=''
+username=$(hostname)
 RQINER_RLS="https://api.github.com/repos/Qubic-Solutions/rqiner-builds/releases/latest"
 
 is_root() {
@@ -51,7 +51,7 @@ input_param() {
     esac
     echo -e "========================================"
     echo -e "=======标识名称:"
-    read -rp "请输入: " name
+    read -rp "请输入: " username
 }
 
 input_param_arm() {
@@ -72,7 +72,7 @@ input_param_arm() {
     esac
     echo -e "========================================"
     echo -e "=======标识名称:"
-    read -rp "请输入: " name
+    read -rp "请输入: " username
 }
 
 install() {
@@ -82,7 +82,7 @@ install() {
     apt install -y g++-11
     wget -O qli-Service-install-auto.sh https://dl.qubic.li/cloud-init/qli-Service-install-auto.sh
     chmod u+x qli-Service-install-auto.sh
-    ./qli-Service-install-auto.sh ${core} ${wallet} ${name}
+    ./qli-Service-install-auto.sh ${core} ${wallet} ${username}
     systemctl restart qli
 }
 
@@ -97,7 +97,7 @@ install_arm() {
 [Unit]
 Description=rqiner service
 [Service]
-ExecStart=/root/qli -t ${core} -i ${wallet} --label ${name}
+ExecStart=/root/qli -t ${core} -i ${wallet} --label ${username}
 StandardOutput=append:/var/log/qli.log
 StandardError=append:/var/log/err.qli.log
 Restart=always
@@ -179,7 +179,7 @@ onekey() {
     is_root
     get_system
     core="$1"
-    name="$2"
+    username="$2"
     wallet="$3"
     install
 }

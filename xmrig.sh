@@ -22,7 +22,7 @@ ALGO="RandomX"
 POOL=""
 WALLET=""
 TLS="true"
-NAME=$(hostname)
+PASS=$(hostname)
 
 XMRIG_RLS="https://api.github.com/repos/xmrig/xmrig/releases/latest"
 
@@ -68,7 +68,7 @@ input_param() {
     echo -e "${Green}=======标识名称(pass / -p):${Font}"
     read -rp "请输入: " name_tmp
     if [ -n "$name_tmp" ]; then
-    NAME=${name_tmp}
+    PASS=${name_tmp}
     fi
     echo -e "========================================"
     echo -e "${Green}=======算法(algo / -a):${Font}"
@@ -121,7 +121,7 @@ filling_param() {
     sed -i "s~\"tls\": false~\"tls\": ${TLS}~" /root/config.json
     sed -i "s~donate.v2.xmrig.com:3333~${POOL}~" /root/config.json
     sed -i "s~YOUR_WALLET_ADDRESS~${WALLET}~" /root/config.json
-    sed -i "s~\"x\"~\"${NAME}\"~" /root/config.json
+    sed -i "s~\"x\"~\"${PASS}\"~" /root/config.json
     sed -i "s~^\(\s*\)\"donate-level\":.*~\1\"donate-level\": 0,~" /root/config.json
 }
 

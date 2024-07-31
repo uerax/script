@@ -22,7 +22,7 @@ ALGO="yespower"
 POOL=""
 WALLET=""
 TLS="true"
-NAME=$(hostname)
+PASS=$(hostname)
 
 cpuminer_RLS="https://api.github.com/repos/rplant8/cpuminer-opt-rplant/releases/latest"
 cpuminer_aurum_RLS="https://api.github.com/repos/bitnet-io/cpuminer-opt-aurum/releases/latest"
@@ -81,7 +81,7 @@ input_param() {
     echo -e "========================================"
     echo -e "${Green}=======标识名称(pass / -p):${Font}"
     read -rp "请输入: " name_tmp
-    NAME=${name_tmp}
+    PASS=${name_tmp}
     echo -e "========================================"
     echo -e "${Green}=======算法(algo / -a):${Font}"
     read -rp "请输入: " algo_tmp
@@ -119,7 +119,7 @@ cpuminer_release() {
 }
 
 filling_param() {
-    param="-a ${ALGO} -o ${POOL} -u ${WALLET} -p ${NAME}"
+    param="-a ${ALGO} -o ${POOL} -u ${WALLET} -p ${PASS}"
 }
 
 systemd_file() {
@@ -228,7 +228,7 @@ change_param() {
     echo -e "========================================"
     echo -e "${Green}=======标识名称(pass / -p):${Font}"
     read -rp "请输入: " name_tmp
-    NAME=$name_tmp
+    PASS=$name_tmp
 
     echo -e "========================================"
     echo -e "${Green}=======算法(algo / -a):${Font}"
@@ -285,7 +285,7 @@ input_param_aurum() {
     echo -e "========================================"
     echo -e "${Green}=======标识名称(pass / -p):${Font}"
     read -rp "请输入: " name_tmp
-    NAME=${name_tmp}
+    PASS=${name_tmp}
     ALGO='aurum'
 
     filling_param
