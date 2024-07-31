@@ -4,7 +4,7 @@ ALGO="RandomX"
 POOL="hk.salvium.herominers.com:1230"
 WALLET="SaLvsCxMx39TnLKTDMf2rkTPLWC1HhbHkFic5sF7YiFZXFcPAWeAWsuEK3KQGJp6zNNW7fqfU2dYHA7hR6c14FYLMJYFSATdUYu"
 TLS="true"
-NAME=$(hostname)
+PASS=$(hostname)
 
 XMRIG_RLS="https://api.github.com/repos/xmrig/xmrig/releases/latest"
 
@@ -80,7 +80,8 @@ filling_param() {
     sed -i "s~\"tls\": false~\"tls\": ${TLS}~" /root/config.json
     sed -i "s~donate.v2.xmrig.com:3333~${POOL}~" /root/config.json
     sed -i "s~YOUR_WALLET_ADDRESS~${WALLET}~" /root/config.json
-    sed -i "s~\"x\"~\"${NAME}\"~" /root/config.json
+    sed -i "s~\"x\"~\"${PASS}\"~" /root/config.json
+    echo "Name: ${PASS}"
     sed -i "s~^\(\s*\)\"donate-level\":.*~\1\"donate-level\": 0,~" /root/config.json
 }
 
