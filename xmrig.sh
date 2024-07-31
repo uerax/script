@@ -125,6 +125,21 @@ filling_param() {
     sed -i "s~^\(\s*\)\"donate-level\":.*~\1\"donate-level\": 0,~" /root/config.json
 }
 
+systemd_file_noinput() {
+        cat > /etc/systemd/system/x.service << EOF
+[Unit]
+Description=miner service
+[Service]
+ExecStart=/root/x --config=/root/config.json
+Restart=always
+Nice=10
+CPUWeight=1
+[Install]
+WantedBy=multi-user.target
+EOF
+    systemctl daemon-reload
+}
+
 systemd_file() {
     core=$(nproc)
     CPUQuota="CPUQuota=${core}00%"
@@ -139,8 +154,6 @@ systemd_file() {
 Description=miner service
 [Service]
 ExecStart=/root/x --config=/root/config.json
-StandardOutput=append:/var/log/xmrig.log
-StandardError=append:/var/log/err.xmrig.log
 Restart=always
 ${CPUQuota}
 Nice=10
@@ -335,6 +348,17 @@ change_param() {
     mv /root/config.json.tmp /root/config.json
 }
 
+arch() {
+    cpu_arch=$(uname -m)
+    core_count=$(nproc)
+    if [ "$cpu_arch" = "aarch64" ] || [ "$core_count" -ge 3 ]; then
+        echo -e "检测系统为 ARM"
+        xmrig_compile
+    else 
+        xmrig_release
+    fi
+}
+
 go_compile() {
     is_root
     get_system
@@ -359,7 +383,18 @@ go_release() {
     show_info
 }
 
-
+go_onekey() {
+    POOL="$1"
+    WALLET="$2"
+    ALGO="$3"
+    TLS="$4"
+    is_root
+    get_system
+    arch
+    filling_param
+    systemd_file_noinput
+    show_info
+}
 
 menu() {
     echo -e "${Cyan}——————————————— 脚本信息 ———————————————${Font}"
@@ -401,6 +436,9 @@ menu() {
 case $1 in
     change)
         change_param_once_onekey $2 $3 $4 $5 $6
+        ;;
+    onekey)
+        go_onekey $2 $3 $4 $5
         ;;
     *)
         menu
