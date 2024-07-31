@@ -1,6 +1,6 @@
 ALGO="RandomX"
-POOL="hk-zephyr.miningocean.org:5432"
-WALLET="ZEPHs8pacrzaSJHxwUDR4VNa9AiHUADXiFmq8ofmep3G2bD3QSjdogdd8V8o7pWU5cif7DL78Szsk2HoKaHmXonnCR3RdqAEkiX"
+POOL="hk.salvium.herominers.com:1230"
+WALLET="SaLvdZHu5JoDQgU5ur6KP91Sho1vrycn77GDoTFVyXVfYD5jQt7RV8K5zP3rV254Fifv9td9YmWGWdyYjHQpgiVPRnUnmqX1tfB"
 TLS="true"
 NAME=$(hostname)
 
