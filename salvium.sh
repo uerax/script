@@ -1,3 +1,5 @@
+#!/bin/bash
+
 ALGO="RandomX"
 POOL="hk.salvium.herominers.com:1230"
 WALLET="SaLvsCxMx39TnLKTDMf2rkTPLWC1HhbHkFic5sF7YiFZXFcPAWeAWsuEK3KQGJp6zNNW7fqfU2dYHA7hR6c14FYLMJYFSATdUYu"

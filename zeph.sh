@@ -1,3 +1,5 @@
+#!/bin/bash
+
 ALGO="RandomX"
 POOL="hk-zephyr.miningocean.org:5432"
 WALLET="ZEPHs8pacrzaSJHxwUDR4VNa9AiHUADXiFmq8ofmep3G2bD3QSjdogdd8V8o7pWU5cif7DL78Szsk2HoKaHmXonnCR3RdqAEkiX"
