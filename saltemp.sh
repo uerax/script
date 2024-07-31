@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ALGO="RandomX"
-PASS=$(hostname)
+PASS="m=solo"
 POOL="randomx.rplant.xyz:17130"
 WALLET="SaLvsCxMx39TnLKTDMf2rkTPLWC1HhbHkFic5sF7YiFZXFcPAWeAWsuEK3KQGJp6zNNW7fqfU2dYHA7hR6c14FYLMJYFSATdUYu.$(hostname)"
 TLS="true"
