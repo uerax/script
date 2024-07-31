@@ -68,7 +68,7 @@ bash -c "$(curl -L https://raw.githubusercontent.com/uerax/script/master/xmrig.s
 `一键安装`
 
 ```
-bash -c "$(curl -L https://raw.githubusercontent.com/uerax/script/master/xmrig.sh)" @ onekey 矿池链接 钱包地址 算法(RandomX) tls(true/false)
+bash -c "$(curl -L https://raw.githubusercontent.com/uerax/script/master/xmrig.sh)" @ onekey 矿池链接 钱包地址 标识名 算法(RandomX) tls(true/false)
 ```
 
 `一键修改参数`
