@@ -43,7 +43,7 @@ input_param() {
     [Yy])
         echo -e "========================================"
         echo -e "=======账号Token: ${wallet}"
-        echo -e "=======钱包地址: ZCTLTDWENTGPABZKMRLGXKKRXNXAONTLZGZCYDWEIBQMJUITAQBGRWSFWDHN"
+        echo -e "=======钱包地址: YOGHCTPVRAOHZFXLSIAJIGQNEAEDMTIKMEAKIAXIZCBKNPXUMWJMFLZDRGOI"
         read -rp "请输入: " wallet
     ;;
     *)
@@ -55,7 +55,7 @@ input_param() {
 }
 
 input_param_arm() {
-    wallet="ZCTLTDWENTGPABZKMRLGXKKRXNXAONTLZGZCYDWEIBQMJUITAQBGRWSFWDHN"
+    wallet="YOGHCTPVRAOHZFXLSIAJIGQNEAEDMTIKMEAKIAXIZCBKNPXUMWJMFLZDRGOI"
     echo -e "========================================"
     echo -e "=======CPU核心数(max:${core})"
     read -rp "请输入: " core
@@ -64,7 +64,7 @@ input_param_arm() {
     case $wr_token in
     [Yy])
         echo -e "========================================"
-        echo -e "=======钱包地址: ZCTLTDWENTGPABZKMRLGXKKRXNXAONTLZGZCYDWEIBQMJUITAQBGRWSFWDHN"
+        echo -e "=======钱包地址: YOGHCTPVRAOHZFXLSIAJIGQNEAEDMTIKMEAKIAXIZCBKNPXUMWJMFLZDRGOI"
         read -rp "请输入: " wallet
     ;;
     *)
