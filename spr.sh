@@ -23,8 +23,9 @@ install() {
     apt-get install zip -y
     mkdir -p /root/spr
     cd /root/spr
-    download_url=$(curl -sL $RLS | grep "browser_download_url" | cut -d '"' -f 4 | grep "linux-gnu-amd64.zip" | head -n1)
-    tags=$(curl -sL $RLS | grep "tag_name" | cut -d '"' -f 4 | head -n1)
+    rls_info=$(curl -sL $RLS)
+    download_url=$(echo $rls_info | grep "browser_download_url" | cut -d '"' -f 4 | grep "linux-gnu-amd64.zip" | head -n1)
+    tags=$(echo $rls_info | grep "tag_name" | cut -d '"' -f 4 | head -n1)
     curl -L "$download_url" -o spr.zip
     unzip spr.zip
     rm spr.zip
