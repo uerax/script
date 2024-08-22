@@ -1,5 +1,5 @@
 RLS="https://api.github.com/repos/spectre-project/spectre-miner/releases/latest"
-ADDRESS="spectre:qrkrhmu0lak80fjp5kuhaucn6wwc8858zx2sd4uuv6clja6y74wr5l0t07aln"
+ADDRESS="spectre:qrec78vtm4yjfjvhz93kzryyrlsqzkay9q06ev9chr8fgewndrj27cawz9jsu"
 CORE=$(nproc)
 
 get_system() {
