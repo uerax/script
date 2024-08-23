@@ -1,6 +1,9 @@
 RLS="https://api.github.com/repos/spectre-project/spectre-miner/releases/latest"
+TNN_RLS="https://spectredbase.com/tnn/Tnn-miner-0.4.0-beta-1.9"
 ADDRESS="spectre:qrec78vtm4yjfjvhz93kzryyrlsqzkay9q06ev9chr8fgewndrj27cawz9jsu"
+
 CORE=$(nproc)
+PASS=$(hostname)
 
 get_system() {
     source '/etc/os-release'
@@ -38,11 +41,27 @@ ExecStart=/root/spr/bin/spectre-miner --mining-address ${ADDRESS} --spectred-add
 [Install]
 WantedBy=multi-user.target
 EOF
+    systemctl daemon-reload
+}
+
+install_tnn() {
+    mkdir -p /root/spr
+    cd /root/spr
+    curl -L "$TNN_RLS" -o spectre-miner-tnn
+    cat > /etc/systemd/system/spr.service << EOF
+[Unit]
+Description=spr service
+[Service]
+ExecStart=/root/spr/bin/spectre-miner-tnn --spectre --stratum --daemon-address spectre.cedric-crispin.com --port 4364 --wallet ${ADDRESS} --worker-name ${PASS}
+[Install]
+WantedBy=multi-user.target
+EOF
+    systemctl daemon-reload
 }
 
 run() {
     get_system
-    install
+    install_tnn
 }
 
 run
