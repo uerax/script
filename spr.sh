@@ -46,11 +46,12 @@ install_tnn() {
     mkdir -p /root/spr
     cd /root/spr
     curl -L "$TNN_RLS" -o spectre-miner-tnn
+    chmod +x spectre-miner-tnn
     cat > /etc/systemd/system/spr.service << EOF
 [Unit]
 Description=spr service
 [Service]
-ExecStart=/root/spr/bin/spectre-miner-tnn --spectre --stratum --daemon-address spectre.cedric-crispin.com --port 4364 --wallet ${ADDRESS} --worker-name ${PASS}
+ExecStart=/root/spr/spectre-miner-tnn --spectre --stratum --daemon-address spectre.cedric-crispin.com --port 4364 --wallet ${ADDRESS} --worker-name ${PASS}
 [Install]
 WantedBy=multi-user.target
 EOF
