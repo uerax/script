@@ -36,6 +36,7 @@ install() {
 Description=spr service
 [Service]
 ExecStart=/root/spr/bin/spectre-miner --mining-address ${ADDRESS} --spectred-address 146.235.233.40 --threads ${CORE}
+Restart=always
 [Install]
 WantedBy=multi-user.target
 EOF
@@ -52,7 +53,8 @@ install_tnn() {
 [Unit]
 Description=spr service
 [Service]
-ExecStart=/root/spr/spectre-miner-tnn --spectre --stratum --daemon-address spectre.cedric-crispin.com --port 4364 --wallet ${ADDRESS} --worker-name ${PASS}
+ExecStart=/root/spr/spectre-miner-tnn --spectre --daemon-address 146.235.233.40 --port 18110 --wallet ${ADDRESS} --worker-name ${PASS}
+Restart=always
 [Install]
 WantedBy=multi-user.target
 EOF
