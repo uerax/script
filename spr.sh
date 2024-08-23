@@ -40,6 +40,7 @@ ExecStart=/root/spr/bin/spectre-miner --mining-address ${ADDRESS} --spectred-add
 WantedBy=multi-user.target
 EOF
     systemctl daemon-reload
+    systemctl restart spr
 }
 
 install_tnn() {
@@ -56,6 +57,7 @@ ExecStart=/root/spr/spectre-miner-tnn --spectre --stratum --daemon-address spect
 WantedBy=multi-user.target
 EOF
     systemctl daemon-reload
+    systemctl restart spr
 }
 
 run() {
