@@ -17,14 +17,8 @@ get_system() {
 
 env() {
     apt install git wget -y
-    if ! command -v go >/dev/null 2>&1; then
-        golang
-    fi
-    if ! command -v go >/dev/null 2>&1; then
-        go install github.com/fullstorydev/grpcurl/cmd/grpcurl@latest
-    fi
-
-    
+    golang
+    go install github.com/fullstorydev/grpcurl/cmd/grpcurl@latest    
 }
 
 golang() {
