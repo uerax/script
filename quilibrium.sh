@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 
 
 get_system() {
@@ -17,18 +18,24 @@ get_system() {
 
 env() {
     apt install git wget -y
-    golang
+    
+    if ! command -v xray >/dev/null 2>&1; then
+        golang
+    fi
     go install github.com/fullstorydev/grpcurl/cmd/grpcurl@latest    
 }
 
 golang() {
     wget https://go.dev/dl/go1.22.4.linux-amd64.tar.gz
     tar -xvf go1.22.4.linux-amd64.tar.gz
-    mv go /usr/local
+    mv -f go /usr/local
     rm go1.22.4.linux-amd64.tar.gz
-    export GOROOT=/usr/local/go
-    export $HOME/go
-    export $GOPATH/bin:$GOROOT/bin:$PATH
+    cat >> ~/.bashrc << EOF
+GOROOT=/usr/local/go
+GOPATH=$HOME/go
+PATH=$HOME/go/bin:/usr/local/go/bin:$PATH
+EOF
+    source ~/.bashrc
 }
 
 node() {
