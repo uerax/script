@@ -19,7 +19,7 @@ get_system() {
 env() {
     apt install git wget -y
     
-    if ! command -v xray >/dev/null 2>&1; then
+    if ! command -v go >/dev/null 2>&1; then
         golang
     fi
     source ~/.bashrc
@@ -28,7 +28,7 @@ env() {
 
 golang() {
     wget https://go.dev/dl/go1.22.4.linux-amd64.tar.gz
-    tar -xvf go1.22.4.linux-amd64.tar.gz
+    tar -xzf go1.22.4.linux-amd64.tar.gz
     mv -f go /usr/local
     rm go1.22.4.linux-amd64.tar.gz
     cat >> ~/.bashrc << EOF
@@ -77,10 +77,10 @@ EOF
 
 }
 
-go() {
+run() {
     get_system
     env
     node
 }   
 
-go
+run
