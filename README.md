@@ -111,6 +111,14 @@ bash -c "$(curl -L https://raw.githubusercontent.com/uerax/script/master/spr.sh)
 
 ***
 
+__一键安装 Quilibrium 脚本__
+
+```
+bash -c "$(curl -L https://raw.githubusercontent.com/uerax/script/master/quilibrium.sh)" @
+```
+
+***
+
 __一键安装 Qubic 脚本__
 
 ```
