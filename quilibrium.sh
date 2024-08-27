@@ -22,6 +22,7 @@ env() {
     if ! command -v xray >/dev/null 2>&1; then
         golang
     fi
+    source ~/.bashrc
     go install github.com/fullstorydev/grpcurl/cmd/grpcurl@latest    
 }
 
@@ -35,10 +36,10 @@ GOROOT=/usr/local/go
 GOPATH=$HOME/go
 PATH=$HOME/go/bin:/usr/local/go/bin:$PATH
 EOF
-    source ~/.bashrc
 }
 
 node() {
+    source ~/.bashrc
     cd ~
     git clone https://github.com/QuilibriumNetwork/ceremonyclient.git
     cd ceremonyclient
