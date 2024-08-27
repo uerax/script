@@ -29,7 +29,7 @@ env() {
 golang() {
     wget https://go.dev/dl/go1.22.4.linux-amd64.tar.gz
     tar -xzf go1.22.4.linux-amd64.tar.gz
-    mv -f go /usr/local
+    mv go /usr/local
     rm go1.22.4.linux-amd64.tar.gz
     cat >> ~/.bashrc << EOF
 GOROOT=/usr/local/go
@@ -68,6 +68,8 @@ EOF
     listenGrpcMultiaddr="/ip4/127.0.0.1/tcp/8337"
     listenRESTMultiaddr="/ip4/127.0.0.1/tcp/8338"
     statsMultiaddr="/dns/stats.quilibrium.com/tcp/443"
+
+    sleep 1
 
     sed -i "s~^\(\s*\)listenGrpcMultiaddr:.*~\1listenGrpcMultiaddr: \"${listenGrpcMultiaddr}\"~" ~/ceremonyclient/node/.config/config.yml
     sed -i "s~^\(\s*\)listenRESTMultiaddr:.*~\1listenRESTMultiaddr: \"${listenRESTMultiaddr}\"~" ~/ceremonyclient/node/.config/config.yml
