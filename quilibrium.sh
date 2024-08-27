@@ -52,9 +52,9 @@ node() {
     listenRESTMultiaddr="/ip4/127.0.0.1/tcp/8338"
     statsMultiaddr="/dns/stats.quilibrium.com/tcp/443"
 
-    sed -i "s~^\(\s*\)listenGrpcMultiaddr:.*~\1listenGrpcMultiaddr: \"${listenGrpcMultiaddr}\"~" .config/config.yml
-    sed -i "s~^\(\s*\)listenRESTMultiaddr:.*~\1listenRESTMultiaddr: \"${listenRESTMultiaddr}\"~" .config/config.yml
-    sed -i "s~^\(\s*\)statsMultiaddr:.*~\1statsMultiaddr: \"${statsMultiaddr}\"~" .config/config.yml
+    sed -i "s~^\(\s*\)listenGrpcMultiaddr:.*~\1listenGrpcMultiaddr: \"${listenGrpcMultiaddr}\"~" ~/ceremonyclient/node/.config/config.yml
+    sed -i "s~^\(\s*\)listenRESTMultiaddr:.*~\1listenRESTMultiaddr: \"${listenRESTMultiaddr}\"~" ~/ceremonyclient/node/.config/config.yml
+    sed -i "s~^\(\s*\)statsMultiaddr:.*~\1statsMultiaddr: \"${statsMultiaddr}\"~" ~/ceremonyclient/node/.config/config.yml
 
     cat > /etc/systemd/system/quilibrium.service << EOF
 [Unit]
