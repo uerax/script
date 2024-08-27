@@ -23,15 +23,12 @@ env() {
 
 golang() {
     wget https://go.dev/dl/go1.22.4.linux-amd64.tar.gz
-    sudo tar -xvf go1.22.4.linux-amd64.tar.gz
-    sudo mv go /usr/local
-    sudo rm go1.22.4.linux-amd64.tar.gz
-    cat >> ~/.bashrc << EOF
-GOROOT=/usr/local/go
-GOPATH=$HOME/go
-PATH=$GOPATH/bin:$GOROOT/bin:$PATH
-EOF
-    source ~/.bashrc
+    tar -xvf go1.22.4.linux-amd64.tar.gz
+    mv go /usr/local
+    rm go1.22.4.linux-amd64.tar.gz
+    export GOROOT=/usr/local/go
+    export $HOME/go
+    export $GOPATH/bin:$GOROOT/bin:$PATH
 }
 
 node() {
