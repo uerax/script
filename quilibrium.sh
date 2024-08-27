@@ -33,8 +33,8 @@ golang() {
     rm go1.22.4.linux-amd64.tar.gz
     cat >> ~/.bashrc << EOF
 GOROOT=/usr/local/go
-GOPATH=$HOME/go
-PATH=$HOME/go/bin:/usr/local/go/bin:$PATH
+GOPATH=\$HOME/go
+PATH=\$GOPATH/bin:\$GOROOT/bin:\$PATH
 EOF
 }
 
