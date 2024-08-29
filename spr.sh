@@ -35,7 +35,7 @@ install() {
 [Unit]
 Description=spr service
 [Service]
-ExecStart=/root/spr/bin/spectre-miner --mining-address ${ADDRESS} --spectred-address 146.235.233.40 --threads ${CORE}
+ExecStart=/root/spr/bin/spectre-miner --mining-address ${ADDRESS} --spectred-address spr.bakasine.eu.org --threads ${CORE}
 Restart=always
 [Install]
 WantedBy=multi-user.target
