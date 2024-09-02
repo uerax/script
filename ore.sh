@@ -37,3 +37,6 @@ EOF
     systemctl daemon-reload
     systemctl restart ore
 }
+
+
+tw_pools
