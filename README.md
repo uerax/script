@@ -111,6 +111,14 @@ bash -c "$(curl -sL https://raw.githubusercontent.com/uerax/script/master/spr.sh
 
 ***
 
+__一键安装 Ore 脚本__
+
+```
+bash -c "$(curl -sL https://raw.githubusercontent.com/uerax/script/master/ore.sh)" @
+```
+
+***
+
 __一键安装 Quilibrium 脚本__
 
 ```

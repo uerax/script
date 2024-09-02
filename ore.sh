@@ -1,4 +1,5 @@
 TW_POOLS_RLS="https://api.github.com/repos/egg5233/ore-hq-client/releases/latest"
+M1_POOLS="http://static.m1pool.xyz/m1miner"
 
 PASS=$(hostname)
 ADDRESS="DAGPCEyGiqQ2wvrQfT6ppKuYKGE2jgejE11UvuEfZkRt"
@@ -38,5 +39,27 @@ EOF
     systemctl restart ore
 }
 
+m1_pools() {
+    mkdir -p /root/ore
+    cd /root/ore
+    wget -O ore http://static.m1pool.xyz/m1miner
+    chmod +x ore
+    cat > /etc/systemd/system/ore.service << EOF
+[Unit]
+Description=ore service
+[Service]
+ExecStart=/root/ore/ore wallet=${ADDRESS}
+Restart=always
+[Install]
+WantedBy=multi-user.target
+EOF
+    systemctl daemon-reload
+    systemctl restart ore
+}
 
-tw_pools
+run() {
+    get_system
+    m1_pools
+}
+
+run
