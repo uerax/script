@@ -17,7 +17,6 @@ iptables -F
 apt autoremove -y --purge needrestart
 apt purge -y netfilter-persistent
 rm -rf /etc/iptables
-apt update
 
 echo -e "========================================"
 echo -e "输入你的密码: "

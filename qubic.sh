@@ -74,7 +74,6 @@ input_param_arm() {
 }
 
 install() {
-    apt update
     apt purge needrestart -y
     apt install libc6
     apt install -y g++-11
