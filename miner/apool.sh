@@ -39,12 +39,11 @@ input_param() {
 }
 
 qubic() {
-    CPUQuota="CPUQuota=${core}00%"
     apt-get install tar curl
     cd /root
     systemctl stop apool
-    download_url=$(curl -sL $QUBIC_RLS | grep "browser_download_url" | cut -d '"' -f 4 | grep "linux" | head -n1) 
-    curl -L "$QUBIC_RLS_TMP" -o apool.tar.gz
+    download_url=$(curl -sL $QUBIC_RLS | grep "browser_download_url" | cut -d '"' -f 4 | grep "linux_autoupdate" | head -n1) 
+    curl -L "$download_url" -o apool.tar.gz
     mkdir -p /root/apool
     tar -xvf apool.tar.gz --strip-components=1 -C /root/apool
     chmod u+x /root/apool/apoolminer
@@ -52,13 +51,10 @@ qubic() {
 [Unit]
 Description=apool service
 [Service]
-ExecStart=/root/apool/apoolminer --account ${QUBIC_SUB} --gpu-off --pool qubic1.hk.apool.io:3334 -t ${core}
+ExecStart=/root/apool/apoolminer --account ${QUBIC_SUB} --gpu-off --solo qubic1.hk.apool.io:3334 -t ${core}
 StandardOutput=append:/var/log/apool.log
-StandardError=append:/var/log/err.apool.log
+StandardError=append:/var/log/apool.log
 Restart=always
-${CPUQuota}
-Nice=10
-CPUWeight=1
 [Install]
 WantedBy=multi-user.target
 EOF

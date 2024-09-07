@@ -96,7 +96,7 @@ Description=rqiner service
 [Service]
 ExecStart=/root/qli -t ${core} -i ${wallet} --label ${username}
 StandardOutput=append:/var/log/qli.log
-StandardError=append:/var/log/err.qli.log
+StandardError=append:/var/log/qli.log
 Restart=always
 ${CPUQuota}
 Nice=10

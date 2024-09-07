@@ -1,8 +1,6 @@
-link="https://github.com/Qubic-Solutions/rqiner-builds/releases/latest/download/rqiner-x86-znver4"
 
-address="YOGHCTPVRAOHZFXLSIAJIGQNEAEDMTIKMEAKIAXIZCBKNPXUMWJMFLZDRGOI"
 
-pass=$(hostname)
+
 
 is_root() {
     if [ $(id -u) == 0 ]; then
@@ -31,23 +29,25 @@ get_system() {
 }
 
 install() {
-    mkdir -p /root/qubic
-    cd /root/qubic
-    curl -L "$link" -o rqiner
-    chmod u+x rqiner
-    cat > /etc/systemd/system/rqiner.service << EOF
-[Unit]
-Description=rqiner service
+    apt install -y git cargo
+    cd /root
+    git clone https://github.com/astrix-network/astrix-cpu-miner.git
+    cd astrix-cpu-miner
+    cargo build --release
+    cd target/release
+    chmod u+x astrix-miner
+
+    cat > /etc/systemd/system/astrix.service << EOF
+    [Unit]
+Description=astrix service
 [Service]
-ExecStart=/root/qubic/rqiner -t $(nproc) -i $address -l $pass --idle-command "/root/ore/ore wallet=DAGPCEyGiqQ2wvrQfT6ppKuYKGE2jgejE11UvuEfZkRt" --no-pplns
-StandardError=append:/var/log/rqiner.log
-StandardOutput=append:/var/log/rqiner.log
+ExecStart=/root/astrix-cpu-miner/target/release/astrix-miner --mining-address astrix:qzka3pmvt4u5xl55jnejyhmnfmgwve5vgkjzldsxfwzxlagafpmxc7z5hxy2l
 Restart=always
 [Install]
 WantedBy=multi-user.target
 EOF
     systemctl daemon-reload
-    systemctl restart rqiner
+    systemctl restart astrix
 }
 
 run() {
