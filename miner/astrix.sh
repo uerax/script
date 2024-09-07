@@ -1,4 +1,5 @@
 
+link="https://github.com/astrix-network/astrix-cpu-miner/releases/download/v0.2.4/astrix-cpu-miner-v0.2.4-linux.zip"
 
 
 
@@ -29,19 +30,20 @@ get_system() {
 }
 
 install() {
-    apt install -y git cargo
-    cd /root
-    git clone https://github.com/astrix-network/astrix-cpu-miner.git
-    cd astrix-cpu-miner
-    cargo build --release
-    cd target/release
+    apt install -y zip
+    mkdir -p /root/astrix
+    cd /root/astrix
+    wget $link -O astrix.zip
+    unzip astrix.zip
+    rm astrix.zip
+
     chmod u+x astrix-miner
 
     cat > /etc/systemd/system/astrix.service << EOF
     [Unit]
 Description=astrix service
 [Service]
-ExecStart=/root/astrix-cpu-miner/target/release/astrix-miner --mining-address astrix:qzka3pmvt4u5xl55jnejyhmnfmgwve5vgkjzldsxfwzxlagafpmxc7z5hxy2l
+ExecStart=/root/astrix/astrix-miner --mining-address astrix:qzka3pmvt4u5xl55jnejyhmnfmgwve5vgkjzldsxfwzxlagafpmxc7z5hxy2l
 Restart=always
 [Install]
 WantedBy=multi-user.target
