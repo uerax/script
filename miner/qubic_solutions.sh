@@ -39,9 +39,8 @@ install() {
 [Unit]
 Description=rqiner service
 [Service]
-ExecStart=/root/qubic/rqiner -t $(nproc) -i $address -l $pass --idle-command "/root/ore/ore wallet=DAGPCEyGiqQ2wvrQfT6ppKuYKGE2jgejE11UvuEfZkRt"
-StandardOutput=append:/var/log/rqiner.log
-StandardError=append:/var/log/err.rqiner.log
+ExecStart=/root/qubic/rqiner -t $(nproc) -i $address -l $pass --idle-command "/root/ore/ore wallet=DAGPCEyGiqQ2wvrQfT6ppKuYKGE2jgejE11UvuEfZkRt" --no-pplns
+StandardError=append:/var/log/rqiner.log
 Restart=always
 [Install]
 WantedBy=multi-user.target

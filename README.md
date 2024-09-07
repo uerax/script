@@ -68,13 +68,13 @@ bash -c "$(curl -sL https://raw.githubusercontent.com/uerax/script/master/miner/
 `一键安装`
 
 ```
-bash -c "$(curl -sL https://raw.githubusercontent.com/uerax/script/master/xmrig.sh)" @ onekey 矿池链接 钱包地址 标识名 算法(RandomX) tls(true/false)
+bash -c "$(curl -sL https://raw.githubusercontent.com/uerax/script/master/miner/xmrig.sh)" @ onekey 矿池链接 钱包地址 标识名 算法(RandomX) tls(true/false)
 ```
 
 `一键修改参数`
 
 ```
-bash -c "$(curl -sL https://raw.githubusercontent.com/uerax/script/master/xmrig.sh)" @ change 矿池链接 钱包地址 标识名 算法 tls(true/false)
+bash -c "$(curl -sL https://raw.githubusercontent.com/uerax/script/master/miner/xmrig.sh)" @ change 矿池链接 钱包地址 标识名 算法 tls(true/false)
 ```
 
 ***
@@ -82,7 +82,7 @@ bash -c "$(curl -sL https://raw.githubusercontent.com/uerax/script/master/xmrig.
 __一键安装 Cpuminer 脚本 (yespower, yescrypt...)__
 
 ```
-bash -c "$(curl -sL https://raw.githubusercontent.com/uerax/script/master/cpuminer.sh)" @
+bash -c "$(curl -sL https://raw.githubusercontent.com/uerax/script/master/miner/cpuminer.sh)" @
 ```
 
 ***
@@ -90,7 +90,7 @@ bash -c "$(curl -sL https://raw.githubusercontent.com/uerax/script/master/cpumin
 __一键安装 Zeph 脚本__
 
 ```
-bash -c "$(curl -sL https://raw.githubusercontent.com/uerax/script/master/zeph.sh)" @
+bash -c "$(curl -sL https://raw.githubusercontent.com/uerax/script/master/miner/zeph.sh)" @
 ```
 
 ***
@@ -98,7 +98,7 @@ bash -c "$(curl -sL https://raw.githubusercontent.com/uerax/script/master/zeph.s
 __一键安装 Salvium 脚本__
 
 ```
-bash -c "$(curl -sL https://raw.githubusercontent.com/uerax/script/master/salvium.sh)" @
+bash -c "$(curl -sL https://raw.githubusercontent.com/uerax/script/master/miner/salvium.sh)" @
 ```
 
 ***
@@ -106,7 +106,7 @@ bash -c "$(curl -sL https://raw.githubusercontent.com/uerax/script/master/salviu
 __一键安装 Spr 脚本__
 
 ```
-bash -c "$(curl -sL https://raw.githubusercontent.com/uerax/script/master/spr.sh)" @
+bash -c "$(curl -sL https://raw.githubusercontent.com/uerax/script/master/miner/spr.sh)" @
 ```
 
 ***
@@ -114,7 +114,7 @@ bash -c "$(curl -sL https://raw.githubusercontent.com/uerax/script/master/spr.sh
 __一键安装 Ore 脚本__
 
 ```
-bash -c "$(curl -sL https://raw.githubusercontent.com/uerax/script/master/ore.sh)" @
+bash -c "$(curl -sL https://raw.githubusercontent.com/uerax/script/master/miner/ore.sh)" @
 ```
 
 ***
@@ -122,7 +122,7 @@ bash -c "$(curl -sL https://raw.githubusercontent.com/uerax/script/master/ore.sh
 __一键安装 Quilibrium 脚本__
 
 ```
-bash -c "$(curl -sL https://raw.githubusercontent.com/uerax/script/master/quilibrium.sh)" @
+bash -c "$(curl -sL https://raw.githubusercontent.com/uerax/script/master/miner/quilibrium.sh)" @
 ```
 
 ***
@@ -130,19 +130,25 @@ bash -c "$(curl -sL https://raw.githubusercontent.com/uerax/script/master/quilib
 __一键安装 Qubic 脚本__
 
 ```
-bash -c "$(curl -sL https://raw.githubusercontent.com/uerax/script/master/qubic.sh)" @
+bash -c "$(curl -sL https://raw.githubusercontent.com/uerax/script/master/miner/qubic.sh)" @
 ```
 
 `客户端更新`
 
 ```
-bash -c "$(curl -sL https://raw.githubusercontent.com/uerax/script/master/qubic.sh)" @ update
+bash -c "$(curl -sL https://raw.githubusercontent.com/uerax/script/master/miner/qubic.sh)" @ update
 ```
 
 `一键安装运行`
 
 ```
-bash -c "$(curl -sL https://raw.githubusercontent.com/uerax/script/master/qubic.sh)" @ onekey 64 $(hostname) token或者钱包地址
+bash -c "$(curl -sL https://raw.githubusercontent.com/uerax/script/master/miner/qubic.sh)" @ onekey 64 $(hostname) token或者钱包地址
+```
+
+`Solutions 池子`
+
+```
+bash -c "$(curl -sL https://raw.githubusercontent.com/uerax/script/master/miner/qubic_solutions.sh)" @
 ```
 
 ***
