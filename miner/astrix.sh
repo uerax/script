@@ -43,7 +43,7 @@ install() {
     [Unit]
 Description=astrix service
 [Service]
-ExecStart=/root/astrix/astrix-miner --astrixd-address 150.230.216.154 --mining-address astrix:qzka3pmvt4u5xl55jnejyhmnfmgwve5vgkjzldsxfwzxlagafpmxc7z5hxy2l
+ExecStart=/root/astrix/astrix-miner --mining-address astrix:qzka3pmvt4u5xl55jnejyhmnfmgwve5vgkjzldsxfwzxlagafpmxc7z5hxy2l
 Restart=always
 [Install]
 WantedBy=multi-user.target
