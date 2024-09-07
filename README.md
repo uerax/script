@@ -62,7 +62,7 @@ bash -c "$(curl -sL https://cdn.jsdelivr.net/gh/uerax/script@master/oracle.sh)" 
 __一键安装 Xmrig 脚本 (randomx, ghostrider, cryptonight...)__
 
 ```
-bash -c "$(curl -sL https://raw.githubusercontent.com/uerax/script/master/xmrig.sh)" @
+bash -c "$(curl -sL https://raw.githubusercontent.com/uerax/script/master/miner/xmrig.sh)" @
 ```
 
 `一键安装`
