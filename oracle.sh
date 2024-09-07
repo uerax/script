@@ -1,7 +1,20 @@
 
 cp /home/ubuntu/.ssh/authorized_keys /root/.ssh/authorized_keys
-apt purge needrestart -y
+
 apt install vim -y
+
+if command -v needrestart >/dev/null 2>&1; then
+    apt purge needrestart -y
+fi
+
+if command -v iptables >/dev/null 2>&1; then
+    # 主要针对oracle vps
+    apt purge netfilter-persistent -y
+    iptables -P INPUT ACCEPT
+    iptables -P FORWARD ACCEPT
+    iptables -P OUTPUT ACCEPT
+    iptables -F
+fi
 
 cat >> ~/.vimrc <<EOF
 :set mouse-=a
