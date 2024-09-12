@@ -21,6 +21,8 @@ cat >> ~/.vimrc <<EOF
 syntax on
 EOF
 
+journalctl --vacuum-time=1w
+
 sed -i 's/#precedence ::ffff:0:0\/96  100/precedence ::ffff:0:0\/96  100/' /etc/gai.conf
 
 bash -c "$(curl -L https://cdn.jsdelivr.net/gh/uerax/script@master/bashrc.sh)" @
