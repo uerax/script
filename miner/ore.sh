@@ -59,7 +59,7 @@ EOF
 
 run() {
     get_system
-    m1_pools
+    tw_pools
 }
 
 run

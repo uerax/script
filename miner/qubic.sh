@@ -75,11 +75,12 @@ input_param_arm() {
 
 install() {
     apt purge needrestart -y
-    apt install libc6
+    apt install -y libc6 jq
     apt install -y g++-11
     wget -O qli-Service-install-auto.sh https://dl.qubic.li/cloud-init/qli-Service-install-auto.sh
     chmod u+x qli-Service-install-auto.sh
     ./qli-Service-install-auto.sh ${core} ${wallet} ${username}
+    
     systemctl restart qli
 }
 
