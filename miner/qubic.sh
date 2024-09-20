@@ -80,7 +80,7 @@ install() {
     wget -O qli-Service-install-auto.sh https://dl.qubic.li/cloud-init/qli-Service-install-auto.sh
     chmod u+x qli-Service-install-auto.sh
     ./qli-Service-install-auto.sh ${core} ${wallet} ${username}
-    
+    jq 'del(.Settings.useLiveConnection)' /q/appsettings.json > tmp.json && mv tmp.json /q/appsettings.json
     systemctl restart qli
 }
 
