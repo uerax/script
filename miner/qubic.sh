@@ -80,7 +80,7 @@ install() {
     wget -O qli-Service-install-auto.sh https://dl.qubic.li/cloud-init/qli-Service-install-auto.sh
     chmod u+x qli-Service-install-auto.sh
     ./qli-Service-install-auto.sh ${core} ${wallet} ${username}
-    jq 'del(.Settings.useLiveConnection)' /q/appsettings.json > tmp.json && mv tmp.json /q/appsettings.json
+    jq '.Settings.useLiveConnection=false | .Settings.isPps=false' /q/appsettings.json > tmp.json && mv tmp.json /q/appsettings.json
     systemctl restart qli
 }
 
@@ -109,13 +109,6 @@ EOF
     systemctl restart qli
 }
 
-optimize_sys() {
-    hugepage=$[$(nproc)*600/2]
-    sed -i '/vm.nr_hugepages=/d' /etc/sysctl.conf
-    echo "vm.nr_hugepages=$hugepage" >> /etc/sysctl.conf
-    /usr/sbin/sysctl -w vm.nr_hugepages=${hugepage}
-}
-
 arch() {
     cpu_arch=$(uname -m)
     if [ "$cpu_arch" = "aarch64" ]; then
@@ -140,7 +133,6 @@ run() {
     is_root
     get_system
     input_param
-    optimize_sys
     install
 }
 
@@ -148,7 +140,6 @@ run_arm() {
     is_root
     get_system
     input_param_arm
-    optimize_sys
     install_arm
 }
 
