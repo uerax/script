@@ -39,13 +39,16 @@ install() {
 [Unit]
 Description=rqiner service
 [Service]
-ExecStart=/root/qubic/rqiner -t $(nproc) -i $address -l $pass --idle-command "/root/ore/ore-hq-client --url ws://ore.tw-pool.com:5487/mine mine --username DAGPCEyGiqQ2wvrQfT6ppKuYKGE2jgejE11UvuEfZkRt.$(hostname) --cores $(nproc)" --no-pplns
+ExecStart=/root/qubic/rqiner -t $(nproc) -i $address -l $pass --idle-command "/root/qubic/idle.sh" --no-pplns
 StandardError=append:/var/log/rqiner.log
 StandardOutput=append:/var/log/rqiner.log
 Restart=always
 [Install]
 WantedBy=multi-user.target
 EOF
+    mkdir -p /root/qubic/
+    [ ! -f "/root/qubic/idle.sh" ] && echo '#!/bin/bash' > /root/qubic/idle.sh && chmod +x /root/qubic/idle.sh
+    
     systemctl daemon-reload
     systemctl restart rqiner
 }

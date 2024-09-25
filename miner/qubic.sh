@@ -73,6 +73,12 @@ input_param_arm() {
     read -rp "请输入: " username
 }
 
+idle() {
+    mkdir -p /root/qubic/
+    [ ! -f "/root/qubic/idle.sh" ] && echo '#!/bin/bash' > /root/qubic/idle.sh
+    chmod +x /root/qubic/idle.sh
+}
+
 install() {
     apt purge needrestart -y
     apt install -y libc6 jq
@@ -80,7 +86,7 @@ install() {
     wget -O qli-Service-install-auto.sh https://dl.qubic.li/cloud-init/qli-Service-install-auto.sh
     chmod u+x qli-Service-install-auto.sh
     ./qli-Service-install-auto.sh ${core} ${wallet} ${username}
-    jq '.Settings.useLiveConnection=false | .Settings.isPps=false' /q/appsettings.json > tmp.json && mv tmp.json /q/appsettings.json
+    jq ".Settings.idleSettings.command=\"/root/qubic/idle.sh\" | del(.Settings.idleSettings.arguments) | .Settings.useLiveConnection=false | .Settings.isPps=false" /q/appsettings.json > tmp.json && mv tmp.json /q/appsettings.json
     systemctl restart qli
 }
 
@@ -133,6 +139,7 @@ run() {
     is_root
     get_system
     input_param
+    idle
     install
 }
 

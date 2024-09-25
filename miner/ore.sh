@@ -1,5 +1,6 @@
 TW_POOLS_RLS="https://api.github.com/repos/egg5233/ore-hq-client/releases/latest"
 M1_POOLS="http://static.m1pool.xyz/m1miner"
+SOLO_POOLS="https://github.com/xintai6660707/ore-mine-pool.git"
 
 PASS=$(hostname)
 ADDRESS="DAGPCEyGiqQ2wvrQfT6ppKuYKGE2jgejE11UvuEfZkRt"
@@ -57,9 +58,27 @@ EOF
     systemctl restart ore
 }
 
+solo_pools() {
+    apt install -y git
+    mkdir -p /root/qubic/
+    cd /root/qubic/
+    git clone "$SOLO_POOLS"
+    cat > /etc/systemd/system/ore.service << EOF
+[Unit]
+Description=ore service
+[Service]
+ExecStart=/root/qubic/ore-mine-pool/ore-mine-pool-linux worker --alias ${PASS} --route-server-url http://route.oreminepool.top:8080/ --server-url public --worker-wallet-address ${ADDRESS}
+Restart=always
+[Install]
+WantedBy=multi-user.target
+EOF
+    systemctl daemon-reload
+    systemctl restart ore
+}
+
 run() {
     get_system
-    tw_pools
+    solo_pools
 }
 
 run

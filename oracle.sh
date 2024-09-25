@@ -1,7 +1,8 @@
 
 cp /home/ubuntu/.ssh/authorized_keys /root/.ssh/authorized_keys
 
-apt install vim -y
+apt update
+apt install -y vim jq
 
 if command -v needrestart >/dev/null 2>&1; then
     apt purge needrestart -y
