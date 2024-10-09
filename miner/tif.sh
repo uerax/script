@@ -102,4 +102,3 @@ WantedBy=multi-user.target
 EOF
 
 systemctl daemon-reload
-systemctl start tif-miningpool.service
