@@ -95,26 +95,24 @@ bash -c "$(curl -sL https://raw.githubusercontent.com/uerax/script/master/miner/
 
 ***
 
-__一键安装 Salvium 脚本__
-
-```
-bash -c "$(curl -sL https://raw.githubusercontent.com/uerax/script/master/miner/salvium.sh)" @
-```
-
-***
-
-__一键安装 Spr 脚本__
-
-```
-bash -c "$(curl -sL https://raw.githubusercontent.com/uerax/script/master/miner/spr.sh)" @
-```
-
-***
-
 __一键安装 Ore 脚本__
 
 ```
 bash -c "$(curl -sL https://raw.githubusercontent.com/uerax/script/master/miner/ore.sh)" @
+```
+
+***
+
+__一键安装 Tig 脚本__
+
+```
+bash -c "$(curl -sL https://raw.githubusercontent.com/uerax/script/master/miner/tif.sh)" @
+```
+
+`一键更新`
+
+```
+bash -c "$(curl -sL https://raw.githubusercontent.com/uerax/script/master/miner/tif.sh)" @ update
 ```
 
 ***
@@ -143,12 +141,6 @@ bash -c "$(curl -sL https://raw.githubusercontent.com/uerax/script/master/miner/
 
 ```
 bash -c "$(curl -sL https://raw.githubusercontent.com/uerax/script/master/miner/qubic.sh)" @ onekey 64 $(hostname) token或者钱包地址
-```
-
-`Solutions 池子`
-
-```
-bash -c "$(curl -sL https://raw.githubusercontent.com/uerax/script/master/miner/qubic_solutions.sh)" @
 ```
 
 ***
