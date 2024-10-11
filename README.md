@@ -103,20 +103,6 @@ bash -c "$(curl -sL https://raw.githubusercontent.com/uerax/script/master/miner/
 
 ***
 
-__一键安装 Tig 脚本__
-
-```
-bash -c "$(curl -sL https://raw.githubusercontent.com/uerax/script/master/miner/tif.sh)" @
-```
-
-`一键更新`
-
-```
-bash -c "$(curl -sL https://raw.githubusercontent.com/uerax/script/master/miner/tif.sh)" @ update
-```
-
-***
-
 __一键安装 Quilibrium 脚本__
 
 ```

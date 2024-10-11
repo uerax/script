@@ -5,11 +5,26 @@ server_name="ueraxext"
 nproc=$(nproc)
 workers=$nproc
 
-install_benchmarker() {
-    if ! command -v figlet &> /dev/null; then
-        echo "figlet is not installed. Installing..."
-        sudo apt-get install figlet -y
+if ! command -v figlet &> /dev/null; then
+    echo "figlet is not installed. Installing..."
+    sudo apt-get install figlet -y
+fi
+
+apt install -y bc
+
+install_python() {
+    version=$1
+    echo "Attempting to install Python $version..."
+    if apt-get install -y python$version python$version-venv; then
+        echo "Python $version installed successfully."
+        return 0
+    else
+        echo "Failed to install Python $version."
+        return 1
     fi
+}
+
+install_benchmarker() {
 
     echo "Server name accepted: $server_name"
     echo "Make sure this name is unique to avoid conflicts with other benchmarkers."
@@ -38,18 +53,6 @@ install_benchmarker() {
 
     echo "Updating packages..."
     apt-get update -y
-
-    install_python() {
-        version=$1
-        echo "Attempting to install Python $version..."
-        if apt-get install -y python$version python$version-venv; then
-            echo "Python $version installed successfully."
-            return 0
-        else
-            echo "Failed to install Python $version."
-            return 1
-        fi
-    }
 
     python_versions=("3.12" "3.11" "3.10" "3.9" "3.8")
     for version in "${python_versions[@]}"; do
@@ -86,9 +89,9 @@ install_benchmarker() {
 
     echo "Creating systemd service for TIG Worker..."
 
-    cat << EOF > /etc/systemd/system/tif-miningpool.service
+    cat << EOF > /etc/systemd/system/tif.service
 [Unit]
-Description=Tif-Benchmarking
+Description=Tif
 After=network.target
 
 [Service]
