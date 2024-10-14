@@ -82,7 +82,7 @@ Description=tig
 After=network.target
 
 [Service]
-ExecStart=/root/tig/myenv/bin/python /root/tig/tig-monorepo/tig-benchmarker/slave.py 1.jp4.up.uerax.eu.org /root/tig/target/release/tig-worker
+ExecStart=/root/tig/myenv/bin/python /root/tig/tig-monorepo/tig-benchmarker/slave.py 1.jp4.up.uerax.eu.org /root/tig/release/tig-worker
 WorkingDirectory=/root/tig/tig-monorepo/tig-benchmarker
 User=root
 Group=root
