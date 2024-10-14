@@ -26,30 +26,17 @@ install_python() {
 
 install_benchmarker() {
 
-    echo "Server name accepted: $server_name"
-    echo "Make sure this name is unique to avoid conflicts with other benchmarkers."
-
-    concat="${address}_${server_name}"
-    echo "The concatenation of the address and name is: $concat"
-
-    if [ -d "/root/tif-miningpool" ]; then
-        echo "The tif-miningpool directory already exists. Deleting it..."
-        rm -rf /root/tif-miningpool
+    if [ -d "/root/tig" ]; then
+        echo "The tig directory already exists. Deleting it..."
+        rm -rf /root/tig
     fi
 
-    echo "Creating the tif-miningpool directory..."
-    mkdir -p /root/tif-miningpool
-    cd /root/tif-miningpool || exit
-
-    echo "Generating the information file..."
-
-    echo "address = $address" > address_name
-    echo "name = $server_name" >> address_name
-
-    echo "File address_name created in /root/tif-miningpool"
+    echo "Creating the tig directory..."
+    mkdir -p /root/tig
+    cd /root/tig || exit
 
     echo "Cloning the tig-monorepo repository..."
-    git clone https://github.com/tig-foundation/tig-monorepo.git
+    git clone https://github.com/tig-foundation/tig-monorepo.git --branch benchmarker_update
 
     echo "Updating packages..."
     apt-get update -y
@@ -68,8 +55,8 @@ install_benchmarker() {
     fi
 
     echo "Creating and activating the virtual environment with Python $python_version..."
-    python$python_version -m venv /root/tif-miningpool/myenv
-    source /root/tif-miningpool/myenv/bin/activate
+    python$python_version -m venv /root/tig/myenv
+    source /root/tig/myenv/bin/activate
 
     echo "Installing Python dependencies..."
     python$python_version -m pip install -r ./tig-monorepo/tig-benchmarker/requirements.txt
@@ -82,21 +69,21 @@ install_benchmarker() {
 
     echo "Compiling tig-worker..."
     cd tig-monorepo || exit
-    cargo build -p tig-worker --release
+    cargo build -p tig-worker --release --target-dir /root/tig
 
     echo "chmod on tig-worker files..."
     chmod +x ./target/release/tig-worker
 
     echo "Creating systemd service for TIG Worker..."
 
-    cat << EOF > /etc/systemd/system/tif.service
+    cat << EOF > /etc/systemd/system/tig.service
 [Unit]
-Description=Tif
+Description=tig
 After=network.target
 
 [Service]
-ExecStart=/root/tif-miningpool/myenv/bin/python /root/tif-miningpool/tig-monorepo/tig-benchmarker/slave.py --workers ${workers} --name "${address}_${server_name}_${nproc}" theinnovationforge.tf /root/tif-miningpool/tig-monorepo/target/release/tig-worker
-WorkingDirectory=/root/tif-miningpool/tig-monorepo/tig-benchmarker
+ExecStart=/root/tig/myenv/bin/python /root/tig/tig-monorepo/tig-benchmarker/slave.py 1.jp4.up.uerax.eu.org /root/tig/target/release/tig-worker
+WorkingDirectory=/root/tig/tig-monorepo/tig-benchmarker
 User=root
 Group=root
 Restart=always
@@ -109,20 +96,21 @@ EOF
 }
 
 update_benchmarker() {
-    if [ -d "/root/tif-miningpool" ]; then
+    if [ -d "/root/tig" ]; then
         echo "Stopping the current benchmarker service..."
-        systemctl stop tif-miningpool.service
+        systemctl stop tig.service
 
-        cd /root/tif-miningpool/tig-monorepo/tig-benchmarker || {
+        cd /root/tig/tig-monorepo/tig-benchmarker || {
             echo "Unable to find the benchmarker directory. The Innovation Forge might not be installed correctly."
             return
         }
         echo "Updating the benchmarker..."
         git fetch --all
         git reset --hard origin/main
+        git switch main
 
         echo "Restarting the benchmarker service..."
-        systemctl start tif-miningpool.service
+        systemctl start tig.service
     else
         echo "The Innovation Forge is not installed."
     fi
