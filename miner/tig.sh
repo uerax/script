@@ -72,7 +72,7 @@ install_benchmarker() {
     cargo build -p tig-worker --release --target-dir /root/tig
 
     echo "chmod on tig-worker files..."
-    chmod +x ./target/release/tig-worker
+    chmod +x /root/tig/release/tig-worker
 
     echo "Creating systemd service for TIG Worker..."
 
@@ -116,8 +116,32 @@ update_benchmarker() {
     fi
 }
 
+install_node() {
+
+    cat > /etc/systemd/system/tig-node.service <<EOF
+[Unit]
+Description=Tif-node
+After=network.target
+
+[Service]
+ExecStart=/root/tig/myenv/bin/python /root/tig/tig-monorepo/tig-benchmarker/master.py /root/tig/config.json
+WorkingDirectory=/root/tig/tig-monorepo/tig-benchmarker
+User=root
+Group=root
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
+systemctl daemon-reload
+}
+
 case $1 in
     update)
+        update_benchmarker
+        ;;
+    node)
         update_benchmarker
         ;;
     *)
