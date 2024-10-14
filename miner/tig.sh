@@ -142,7 +142,7 @@ case $1 in
         update_benchmarker
         ;;
     node)
-        update_benchmarker
+        install_node
         ;;
     *)
         install_benchmarker
