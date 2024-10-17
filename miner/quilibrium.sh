@@ -22,7 +22,6 @@ env() {
     if ! command -v go >/dev/null 2>&1; then
         golang
     fi
-    source ~/.bashrc
     go install github.com/fullstorydev/grpcurl/cmd/grpcurl@latest    
 }
 
@@ -36,6 +35,7 @@ GOROOT=/usr/local/go
 GOPATH=\$HOME/go
 PATH=\$GOPATH/bin:\$GOROOT/bin:\$PATH
 EOF
+    export PATH=/root/bin:/usr/local/go/bin:$PATH
 }
 
 node() {
