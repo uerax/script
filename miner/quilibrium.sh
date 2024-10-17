@@ -45,9 +45,9 @@ node() {
     cd ceremonyclient
     git pull
     git checkout release
-    systemctl stop quilibrium
+    systemctl stop quili
 
-    cat > /etc/systemd/system/quilibrium.service << EOF
+    cat > /etc/systemd/system/quili.service << EOF
 [Unit]
 Description=Ceremony Client Go App Service
 
@@ -63,7 +63,7 @@ ExecStart=/root/ceremonyclient/node/release_autorun.sh
 WantedBy=multi-user.target
 EOF
     systemctl daemon-reload
-    systemctl start quilibrium
+    systemctl start quili
 
     listenGrpcMultiaddr="/ip4/127.0.0.1/tcp/8337"
     listenRESTMultiaddr="/ip4/127.0.0.1/tcp/8338"
@@ -75,7 +75,7 @@ EOF
     sed -i "s~^\(\s*\)listenRESTMultiaddr:.*~\1listenRESTMultiaddr: \"${listenRESTMultiaddr}\"~" ~/ceremonyclient/node/.config/config.yml
     sed -i "s~^\(\s*\)statsMultiaddr:.*~\1statsMultiaddr: \"${statsMultiaddr}\"~" ~/ceremonyclient/node/.config/config.yml
 
-    systemctl restart quilibrium
+    systemctl restart quili
 
 }
 
