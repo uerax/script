@@ -50,6 +50,16 @@ xmrig_compile() {
     cd .. && rm -rf xmrig-dir
 }
 
+xmrig_release() {
+    apt-get install tar curl
+    cd /root
+    download_url=$(curl -sL $XMRIG_RLS | grep "browser_download_url" | cut -d '"' -f 4 | grep "linux-static-x64")
+    curl -L "$download_url" -o xmrig.tar.gz
+    tar -vxf xmrig.tar.gz --strip-components=1
+    mv xmrig x
+    rm xmrig.tar.gz
+    rm SHA256SUMS
+}
 
 filling_param() {
     sed -i "s~\"coin\": null~\"coin\": \"${ALGO}\"~" /root/config.json
@@ -57,6 +67,17 @@ filling_param() {
     sed -i "s~YOUR_WALLET_ADDRESS~${WALLET}~" /root/config.json
     sed -i "s~\"x\"~\"${PASS}\"~" /root/config.json
     sed -i "s~^\(\s*\)\"donate-level\":.*~\1\"donate-level\": 0,~" /root/config.json
+}
+
+arch() {
+    cpu_arch=$(uname -m)
+    core_count=$(nproc)
+    if [ "$cpu_arch" = "aarch64" ] || [ "$core_count" -ge 3 ]; then
+        echo -e "检测系统为 ARM"
+        xmrig_compile
+    else 
+        xmrig_release
+    fi
 }
 
 systemd_file() {
@@ -77,7 +98,7 @@ EOF
 go_install() {
     is_root
     get_system
-    xmrig_compile
+    arch
     filling_param
     systemd_file
 }
