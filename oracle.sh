@@ -1,5 +1,5 @@
 
-cp /home/ubuntu/.ssh/authorized_keys /root/.ssh/authorized_keys
+cp .ssh/authorized_keys /root/.ssh/authorized_keys
 
 apt update
 apt install -y vim jq
