@@ -22,7 +22,7 @@ env() {
     if ! command -v go >/dev/null 2>&1; then
         golang
     fi
-    go install github.com/fullstorydev/grpcurl/cmd/grpcurl@latest    
+    /root/go/bin/go install github.com/fullstorydev/grpcurl/cmd/grpcurl@latest   
 }
 
 golang() {
@@ -79,7 +79,7 @@ EOF
 
 run() {
     get_system
-    #env
+    env
     node
 }   
 
