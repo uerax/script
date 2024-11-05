@@ -22,7 +22,7 @@ env() {
     if ! command -v go >/dev/null 2>&1; then
         golang
     fi
-    /root/go/bin/go install github.com/fullstorydev/grpcurl/cmd/grpcurl@latest   
+    /usr/local/go/bin/go install github.com/fullstorydev/grpcurl/cmd/grpcurl@latest   
 }
 
 golang() {
@@ -67,14 +67,12 @@ EOF
     listenRESTMultiaddr="/ip4/127.0.0.1/tcp/8338"
     statsMultiaddr="/dns/stats.quilibrium.com/tcp/443"
 
-    sleep 1
+    sleep 100
 
     sed -i "s~^\(\s*\)listenGrpcMultiaddr:.*~\1listenGrpcMultiaddr: \"${listenGrpcMultiaddr}\"~" ~/ceremonyclient/node/.config/config.yml
     sed -i "s~^\(\s*\)listenRESTMultiaddr:.*~\1listenRESTMultiaddr: \"${listenRESTMultiaddr}\"~" ~/ceremonyclient/node/.config/config.yml
     sed -i "s~^\(\s*\)statsMultiaddr:.*~\1statsMultiaddr: \"${statsMultiaddr}\"~" ~/ceremonyclient/node/.config/config.yml
 
-    systemctl restart quili
-    
 }
 
 run() {
