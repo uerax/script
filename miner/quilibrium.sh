@@ -66,7 +66,7 @@ EOF
     listenRESTMultiaddr="/ip4/127.0.0.1/tcp/8338"
     statsMultiaddr="/dns/stats.quilibrium.com/tcp/443"
 
-    sleep 2
+    sleep 5
     systemctl stop quili
 
     sed -i "s~^\(\s*\)listenGrpcMultiaddr:.*~\1listenGrpcMultiaddr: \"${listenGrpcMultiaddr}\"~" ~/ceremonyclient/node/.config/config.yml
