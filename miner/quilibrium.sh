@@ -61,13 +61,13 @@ WantedBy=multi-user.target
 EOF
     systemctl daemon-reload
     systemctl start quili
-    systemctl stop quili
 
     listenGrpcMultiaddr="/ip4/127.0.0.1/tcp/8337"
     listenRESTMultiaddr="/ip4/127.0.0.1/tcp/8338"
     statsMultiaddr="/dns/stats.quilibrium.com/tcp/443"
 
-    sleep 3
+    sleep 2
+    systemctl stop quili
 
     sed -i "s~^\(\s*\)listenGrpcMultiaddr:.*~\1listenGrpcMultiaddr: \"${listenGrpcMultiaddr}\"~" ~/ceremonyclient/node/.config/config.yml
     sed -i "s~^\(\s*\)listenRESTMultiaddr:.*~\1listenRESTMultiaddr: \"${listenRESTMultiaddr}\"~" ~/ceremonyclient/node/.config/config.yml
