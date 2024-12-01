@@ -86,7 +86,7 @@ install() {
     wget -O qli-Service-install-auto.sh https://dl.qubic.li/cloud-init/qli-Service-install-auto.sh
     chmod u+x qli-Service-install-auto.sh
     ./qli-Service-install-auto.sh ${core} ${wallet} ${username}
-    jq ".ClientSettings.idling.command=\"/root/qubic/idle.sh\" | .ClientSettings.pps=false | .ClientSettings.poolAddress=https://mine.qubic.li/" /q/appsettings.json > tmp.json && mv tmp.json /q/appsettings.json
+    jq ".ClientSettings.idling.command=\"/root/qubic/idle.sh\" | .ClientSettings.pps=false | .ClientSettings.poolAddress=\"https://mine.qubic.li/\"" /q/appsettings.json > tmp.json && mv tmp.json /q/appsettings.json
     systemctl restart qli
 }
 
