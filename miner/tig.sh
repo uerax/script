@@ -99,6 +99,8 @@ update_benchmarker() {
     if [ -d "/root/tig" ]; then
         echo "Stopping the current benchmarker service..."
         systemctl stop tig.service
+        echo "Restarting the benchmarker service..."
+
 
         cd /root/tig/tig-monorepo/tig-benchmarker || {
             echo "Unable to find the benchmarker directory. The Innovation Forge might not be installed correctly."
@@ -109,7 +111,12 @@ update_benchmarker() {
         git reset --hard origin/main
         git switch main
 
-        echo "Restarting the benchmarker service..."
+        cd /root/tig/tig-monorepo || exit
+
+        cargo build -p tig-worker --release --target-dir /root/tig
+
+        echo "chmod on tig-worker files..."
+        chmod +x /root/tig/release/tig-worker
         systemctl start tig.service
     else
         echo "The Innovation Forge is not installed."
