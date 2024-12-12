@@ -11,8 +11,8 @@ install_node() {
 install_slaver() {
     curl -s https://install.zerotier.com | sudo bash
     cd /root/
-    wget -sL "$1" || exit
-    mv planet /var/lib/zerotier-one/   
+    wget -L "$1" || exit
+    mv planet /var/lib/zerotier-one/
     systemctl restart zerotier-one.service
     zerotier-cli join "$2"
 }
