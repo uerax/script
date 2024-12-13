@@ -430,7 +430,7 @@ menu() {
     ;;
     esac
 }
-1
+
 case $1 in
     change)
         change_param_once_onekey $2 $3 $4 $5 $6
