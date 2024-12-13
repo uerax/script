@@ -22,7 +22,8 @@ env() {
     if ! command -v go >/dev/null 2>&1; then
         golang
     fi
-    /usr/local/go/bin/go install github.com/fullstorydev/grpcurl/cmd/grpcurl@latest   
+    source /root/.bashrc
+    go install github.com/fullstorydev/grpcurl/cmd/grpcurl@latest   
 }
 
 golang() {
@@ -35,14 +36,12 @@ GOROOT=/usr/local/go
 GOPATH=\$HOME/go
 PATH=\$GOPATH/bin:\$GOROOT/bin:\$PATH
 EOF
-    export PATH=/root/bin:/usr/local/go/bin:$PATH
 }
 
 node() {
     cd ~
     git clone --depth 1 --branch release https://github.com/QuilibriumNetwork/ceremonyclient.git
     cd ceremonyclient/node
-    systemctl stop quili
 
     cat > /etc/systemd/system/quili.service << EOF
 [Unit]
@@ -60,10 +59,6 @@ ExecStart=/root/ceremonyclient/node/release_autorun.sh
 WantedBy=multi-user.target
 EOF
     systemctl daemon-reload
-    systemctl start quili
-
-    
-
 }
 
 run() {
