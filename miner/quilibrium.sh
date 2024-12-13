@@ -22,7 +22,10 @@ env() {
     if ! command -v go >/dev/null 2>&1; then
         golang
     fi
-    source /root/.bashrc
+    # 立即加载更新的环境变量
+    export GOROOT=/usr/local/go
+    export GOPATH=$HOME/go
+    export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
     go install github.com/fullstorydev/grpcurl/cmd/grpcurl@latest   
 }
 
@@ -31,7 +34,7 @@ golang() {
     tar -xzf go1.22.4.linux-amd64.tar.gz
     mv go /usr/local
     rm go1.22.4.linux-amd64.tar.gz
-    cat >> ~/.bashrc << EOF
+    cat >> /root/.bashrc << EOF
 GOROOT=/usr/local/go
 GOPATH=\$HOME/go
 PATH=\$GOPATH/bin:\$GOROOT/bin:\$PATH
