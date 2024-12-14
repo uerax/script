@@ -25,11 +25,11 @@ curl -L "https://github.com/prometheus/node_exporter/releases/download/v$tag/nod
 tar -vxf node_exporter.tar.gz --strip-components=1 || exit
 rm node_exporter.tar.gz
 
-cat > /etc/systemd/system/node_exporter.service << EOF
+cat > /etc/systemd/system/node-exporter.service << EOF
 [Unit]
-Description=node_exporter service
+Description=node-exporter service
 [Service]
-ExecStart=/root/node_exporter/node_exporter
+ExecStart=/root/node-exporter/node_exporter
 Restart=always
 [Install]
 WantedBy=multi-user.target

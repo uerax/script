@@ -52,7 +52,7 @@ bash -c "$(curl -sL https://cdn.jsdelivr.net/gh/uerax/script@master/oracle.sh)" 
 __安装 Node Exporter__
 
 ```
-bash -c "$(curl -sL https://cdn.jsdelivr.net/gh/uerax/script@master/node-exporter.sh)" @
+bash -c "$(curl -sL https://raw.githubusercontent.com/uerax/script/master/node-exporter.sh)" @
 ```
 
 ***
