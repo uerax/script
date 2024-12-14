@@ -19,14 +19,6 @@ bash -c "$(curl -sL https://cdn.jsdelivr.net/gh/uerax/script@master/bashrc.sh)" 
 
 ***
 
-__一键修改 Root 密码和端口__
-
-```
-bash -c "$(curl -sL https://cdn.jsdelivr.net/gh/uerax/script@master/ssh.sh)" @
-```
-
-***
-
 __Mac 工具备份脚本__
 
 ```
@@ -57,6 +49,14 @@ bash -c "$(curl -sL https://cdn.jsdelivr.net/gh/uerax/script@master/oracle.sh)" 
 
 ***
 
+__安装 Node Exporter__
+
+```
+bash -c "$(curl -sL https://cdn.jsdelivr.net/gh/uerax/script@master/node-exporter.sh)" @
+```
+
+***
+
 ## Mining
 
 __一键安装 Xmrig 脚本 (randomx, ghostrider, cryptonight...)__
@@ -79,26 +79,10 @@ bash -c "$(curl -sL https://raw.githubusercontent.com/uerax/script/master/miner/
 
 ***
 
-__一键安装 Cpuminer 脚本 (yespower, yescrypt...)__
-
-```
-bash -c "$(curl -sL https://raw.githubusercontent.com/uerax/script/master/miner/cpuminer.sh)" @
-```
-
-***
-
 __一键安装 Zeph 脚本__
 
 ```
 bash -c "$(curl -sL https://raw.githubusercontent.com/uerax/script/master/miner/zeph.sh)" @
-```
-
-***
-
-__一键安装 Ore 脚本__
-
-```
-bash -c "$(curl -sL https://raw.githubusercontent.com/uerax/script/master/miner/ore.sh)" @
 ```
 
 ***

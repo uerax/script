@@ -20,9 +20,9 @@ apt-get install tar curl -y
 
 tag=$(curl -sL https://api.github.com/repos/prometheus/node_exporter/releases/latest | grep "tag_name" | cut -d '"' -f 4 | head -n1 | sed 's/^v//')
 
-curl -L "https://github.com/prometheus/node_exporter/releases/download/v$tag/node_exporter-tag.$release_os-$release_arch.tar.gz" -o node_exporter.tar.gz
+curl -L "https://github.com/prometheus/node_exporter/releases/download/v$tag/node_exporter-$tag.$release_os-$release_arch.tar.gz" -o node_exporter.tar.gz
 
-tar -vxf node_exporter.tar.gz --strip-components=1
+tar -vxf node_exporter.tar.gz --strip-components=1 || exit
 rm node_exporter.tar.gz
 
 cat > /etc/systemd/system/node_exporter.service << EOF
