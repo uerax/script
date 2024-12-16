@@ -82,7 +82,7 @@ Description=tig
 After=network.target
 
 [Service]
-ExecStart=/root/tig/myenv/bin/python /root/tig/tig-monorepo/tig-benchmarker/slave.py --workers $(nproc) --master 1.db1.ext.uerax.eu.org /root/tig/release/tig-worker
+ExecStart=/root/tig/myenv/bin/python /root/tig/tig-monorepo/tig-benchmarker/slave.py --ttl 0 --workers $(nproc) --master 1.db1.ext.uerax.eu.org /root/tig/release/tig-worker
 WorkingDirectory=/root/tig/tig-monorepo/tig-benchmarker
 User=root
 Group=root
@@ -114,7 +114,7 @@ update_benchmarker() {
         cd /root/tig/tig-monorepo || exit
 
         source "$HOME/.cargo/env"
-        
+
         cargo build -p tig-worker --release --target-dir /root/tig
 
         echo "chmod on tig-worker files..."
