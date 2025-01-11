@@ -10,11 +10,11 @@ else
     release_arch="arm64"
 fi
 
-rm -r /root/node_exporter
+rm -r /root/node-exporter
 
-mkdir -p /root/node_exporter
+mkdir -p /root/node-exporter
 
-cd /root/node_exporter
+cd /root/node-exporter
 
 apt-get install tar curl -y
 
