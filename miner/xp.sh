@@ -6,7 +6,7 @@ chmod +x miner-linux-amd64
 
 cat > /root/xp/run.sh << EOF
 #!/bin/bash
-PARENT_PROCESS_PID=$$
+PARENT_PROCESS_PID=\$\$
 
 cd /root/xp
 
