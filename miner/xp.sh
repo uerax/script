@@ -1,6 +1,6 @@
 mkdir -p /root/xp && cd  /root/xp
 
-wget https://github.com/xpherechain/Xphere-miner/releases/download/v0.0.2/miner-linux-amd64
+wget https://github.com/xpherechain/Xphere-miner/releases/download/v0.0.4/miner-linux-amd64 -O /root/xp/miner-linux-amd64
 
 chmod +x miner-linux-amd64
 
@@ -12,7 +12,7 @@ cd /root/xp
 
 for i in {1..20}
 do
-        ./miner-linux-amd64 -targetMiner 0x076762aaa2f23f42506e1102f0f24edf5d6cd8f1 -domain https://sgp-mining.x-phere.com &
+        ./miner-linux-amd64 -targetMiner 0x076762aaa2f23f42506e1102f0f24edf5d6cd8f1 -domain https://sgp-mining.x-phere.com,https://bkk-mining.x-phere.com,https://hkg-mining.x-phere.com,https://idn-mining.x-phere.com &
 done
 
 # 等待
