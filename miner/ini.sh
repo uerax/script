@@ -7,7 +7,7 @@ chmod +x /root/ini/iniminer-linux-x64
 
 cat > /root/ini/run.sh << EOF
 #!/bin/bash
-/root/ini/iniminer-linux-x64 --pool stratum+tcp://0x98F3706C10f91bA060348564D78c887011C36B4C.$(hostname)@pool-a.yatespool.com:31588
+/root/ini/iniminer-linux-x64 --pool stratum+tcp://0x98F3706C10f91bA060348564D78c887011C36B4C.$(hostname)@pool-c.yatespool.com:31189
 EOF
 
 chmod +x /root/ini/run.sh
