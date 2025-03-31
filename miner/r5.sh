@@ -6,8 +6,6 @@ tar -xvf r5.tar
 
 rm r5.tar
 
-cd r5_linux
-
 cat > node.ini <<EOF
 [R5 Node Relayer]
 network = mainnet
@@ -30,7 +28,7 @@ Type=simple
 Restart=always
 RestartSec=5s
 WorkingDirectory=/root/r5
-ExecStart=/root/r5
+ExecStart=/root/r5/r5 --network mainnet --rpc --miner coinbase=0x98f3706c10f91ba060348564d78c887011c36b4c threads=$[$(nproc)/2]
 
 [Install]
 WantedBy=multi-user.target
