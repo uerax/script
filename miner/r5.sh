@@ -1,3 +1,4 @@
+rm -r /root/r5
 mkdir -p /root/r5
 cd /root/r5
 wget https://github.com/uerax/script/releases/download/v0.0.1/r5.tar -O r5.tar
