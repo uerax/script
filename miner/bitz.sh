@@ -11,7 +11,7 @@ chmod +x ore-mine-pool-linux-avx512
 Description=bitz service
 [Service]
 LimitNOFILE=65536
-ExecStart=/root/ore-mine-pool/ore-mine-pool-linux-avx512 worker --server-url http://mine.oreminepool.top/ --worker-wallet-address AuWuKrtJW6yMdxRYGR6rqXVdXYgEJrFhLd3Z15i1Me7D
+ExecStart=/root/ore-mine-pool/ore-mine-pool-linux-avx512 worker --route-server-url 'http://minebitz1.oreminepool.top:8880/' --server-url 'bitz' --worker-wallet-address AuWuKrtJW6yMdxRYGR6rqXVdXYgEJrFhLd3Z15i1Me7D
 Restart=always
 [Install]
 WantedBy=multi-user.target
