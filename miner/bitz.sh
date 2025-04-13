@@ -1,6 +1,6 @@
 rm -r /root/ore-mine-pool
 
-git clone https://github.com/xintai6660707/ore-mine-pool.git
+git clone --depth 1 https://github.com/xintai6660707/ore-mine-pool.git
 
 cd ore-mine-pool
 chmod +x ore-mine-pool-linux
@@ -10,6 +10,7 @@ chmod +x ore-mine-pool-linux-avx512
 [Unit]
 Description=bitz service
 [Service]
+LimitNOFILE=65536
 ExecStart=/root/ore-mine-pool/ore-mine-pool-linux-avx512 worker --server-url http://mine.oreminepool.top/ --worker-wallet-address AuWuKrtJW6yMdxRYGR6rqXVdXYgEJrFhLd3Z15i1Me7D
 Restart=always
 [Install]
