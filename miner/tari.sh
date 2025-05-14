@@ -39,3 +39,6 @@ WantedBy=multi-user.target
 EOF
     systemctl daemon-reload
 }
+
+get_system
+install
