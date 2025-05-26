@@ -1,4 +1,4 @@
-RLS="https://github.com/tari-project/tari/releases/download/v2.1.1/tari_suite-2.1.1-9012bc0-linux-x86_64.zip"
+RLS="https://github.com/tari-project/tari/releases/download/v4.0.0/tari_suite-4.0.0-c05c1ce-linux-x86_64.zip"
 ADDRESS="1214prXG6MNLpadJq7G8EPLb11Sz7H7PHGVa41UZ7RpKuvcz3YwSEmWBpTGipXbvpVNtPzK6JfexKxYaaFWxe6BAxPS"
 
 get_system() {
