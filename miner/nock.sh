@@ -6,4 +6,15 @@ mv v*/* . && rm -rf v*
 
 sed -i "s~apiKey: \"\"~apiKey: \"nock0000-c7e0-1de1-fb75-d19f0ac2a7f0\"~" config.yaml
 
-sed -i "s~  proxy: \"\"~  proxy: \"http://141.148.222.113:9190\"~" config.yaml
+    cat > /etc/systemd/system/nock.service << EOF
+[Unit]
+Description=nock service
+[Service]
+LimitNOFILE=65536
+ExecStart=/root/nock/h9-miner-nock-linux-amd64 -config /root/nock/config.yaml
+Restart=always
+[Install]
+WantedBy=multi-user.target
+EOF
+
+systemctl daemon-reload
